@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link, Navigate } from 'react-router-dom';
 import { Accounts } from 'meteor/accounts-base';
-import { Alert, Card, Col, Container, Row } from 'react-bootstrap';
+import { Alert, Card, Col, Container, Row, Form } from 'react-bootstrap';
 import SimpleSchema from 'simpl-schema';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import { AutoForm, ErrorsField, SubmitField, TextField } from 'uniforms-bootstrap5';
@@ -17,13 +17,16 @@ const SignUp = ({ location }) => {
   const schema = new SimpleSchema({
     email: String,
     password: String,
+    firstname: String,
+    lastname: String,
+
   });
   const bridge = new SimpleSchema2Bridge(schema);
 
   /* Handle SignUp submission. Create user account and a profile entry, then redirect to the home page. */
   const submit = (doc) => {
-    const { email, password } = doc;
-    Accounts.createUser({ email, username: email, password }, (err) => {
+    const { email, password, firstname, lastname } = doc;
+    Accounts.createUser({ email, username: email, password, firstname, lastname }, (err) => {
       if (err) {
         setError(err.reason);
       } else {
@@ -51,8 +54,17 @@ const SignUp = ({ location }) => {
               <Card.Body>
                 <TextField name="email" placeholder="E-mail address" />
                 <TextField name="password" placeholder="Password" type="password" />
+                {/* First Name and Last Name in the same row */}
+                <Form.Group as={Row}>
+                  <Col>
+                    <TextField name="firstname" placeholder="First Name" />
+                  </Col>
+                  <Col>
+                    <TextField name="lastname" placeholder="Last Name" />
+                  </Col>
+                </Form.Group>
                 <ErrorsField />
-                <SubmitField />
+                <SubmitField value="Register" />
               </Card.Body>
             </Card>
           </AutoForm>
