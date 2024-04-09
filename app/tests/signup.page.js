@@ -11,9 +11,13 @@ class SignupPage {
     this.lastNameInput = Selector('input[name="lastname"]');
     this.courseNameInput = Selector('input[name="coursename"]');
     this.imageInput = Selector('input[name="image"]');
-    this.majorInput = Selector('input[name="major"]');
+    this.majorSelect = Selector('select[name="major"]');
     this.classStandingSelect = Selector('select[name="classStanding"]');
-    // Add more selectors as needed
+    this.subjectInput = Selector('input[name="subject"]');
+    this.descriptionInput = Selector('textarea[name="description"]');
+    this.tutorYesRadio = Selector('input#tutor-yes[type="radio"]');
+    this.tutorNoRadio = Selector('input#tutor-no[type="radio"]');
+    this.registerButton = Selector('button').withText('Register');
   }
 
   async isDisplayed(testController) {
@@ -29,11 +33,14 @@ class SignupPage {
       .typeText(this.lastNameInput, userData.lastname)
       .typeText(this.courseNameInput, userData.coursename)
       .typeText(this.imageInput, userData.image)
-      .typeText(this.majorInput, userData.major)
+      .click(this.majorSelect)
+      .click(Selector('option').withText(userData.major))
       .click(this.classStandingSelect)
-      .click(Selector('option', { text: userData.classStanding }))
-      .wait(1000) // Wait for 1 second before submitting the form
-      .click(Selector('button').withText('Register')); // Adjust the selector to match your form's button
+      .click(Selector('option').withText(userData.classStanding))
+      .typeText(this.subjectInput, userData.subject)
+      .typeText(this.descriptionInput, userData.description)
+      .click(userData.tutor ? this.tutorYesRadio : this.tutorNoRadio)
+      .click(this.registerButton);
 
     await navBar.isLoggedIn(testController, userData.email);
   }

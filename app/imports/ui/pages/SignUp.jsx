@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link, Navigate } from 'react-router-dom';
-import { Accounts } from 'meteor/accounts-base';
+import { Accounts, Meteor } from 'meteor/accounts-base';
 import { Alert, Card, Col, Container, Row, Form, InputGroup } from 'react-bootstrap';
 import SimpleSchema from 'simpl-schema';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
@@ -32,19 +32,35 @@ const SignUp = ({ location }) => {
     firstname: String,
     lastname: String,
     coursename: String,
+    classStanding: String,
     image: String,
     major: String,
     subject: String,
+    tutor: Boolean,
     description: String,
   });
   const bridge = new SimpleSchema2Bridge(schema);
 
   const submit = (doc) => {
-    const { email, password, firstname, lastname, coursename, image, major, subject, description } = doc;
-    Accounts.createUser({ email, username: email, password, firstname, lastname, coursename, image, major, subject, description }, (err) => {
+    const { email, password, firstname, lastname, coursename, image, major, subject, description, tutor } = doc;
+    Accounts.createUser({ email, password }, (err) => {
       if (err) {
-        setError(err.reason);
+        setError(err.reason || 'An error occurred while creating the account.');
       } else {
+        // User created successfully, now add additional data to the profile
+        const userId = Meteor.userId();
+        Meteor.users.update(userId, {
+          $set: {
+            'profile.firstname': firstname,
+            'profile.lastname': lastname,
+            'profile.coursename': coursename,
+            'profile.image': image,
+            'profile.major': major,
+            'profile.subject': subject,
+            'profile.description': description,
+            'profile.tutor': tutor,
+          },
+        });
         setError('');
         setRedirectToRef(true);
       }
@@ -59,28 +75,28 @@ const SignUp = ({ location }) => {
   return (
     <Container id="signup-page" className="py-3">
       <Row className="justify-content-center">
-        <Col xs={12} md={6}> {/* Adjusted for responsiveness */}
-          <div className="text-center"> {/* Changed from Col to div */}
+        <Col xs={12} md={6}>
+          <div className="text-center">
             <h2>Register your account</h2>
-          </div> {/* Added closing tag */}
+          </div>
           <AutoForm schema={bridge} onSubmit={data => submit(data)}>
             <Card>
               <Card.Body>
                 <Form.Group className="mb-2">
                   <Form.Label>Email</Form.Label>
                   <InputGroup>
-                    <InputGroup.Text> {/* Added closing tag */}
+                    <InputGroup.Text>
                       <PersonFill />
-                    </InputGroup.Text> {/* Added closing tag */}
+                    </InputGroup.Text>
                     <Form.Control type="email" name="email" placeholder="E-mail address" />
                   </InputGroup>
                 </Form.Group>
                 <Form.Group className="mb-2">
                   <Form.Label>Password</Form.Label>
                   <InputGroup>
-                    <InputGroup.Text> {/* Added closing tag */}
+                    <InputGroup.Text>
                       <LockFill />
-                    </InputGroup.Text> {/* Added closing tag */}
+                    </InputGroup.Text>
                     <Form.Control type="password" name="password" placeholder="Password" />
                   </InputGroup>
                 </Form.Group>
@@ -88,18 +104,18 @@ const SignUp = ({ location }) => {
                   <Col>
                     <Form.Label>First Name</Form.Label>
                     <InputGroup>
-                      <InputGroup.Text> {/* Added closing tag */}
+                      <InputGroup.Text>
                         <PersonFill />
-                      </InputGroup.Text> {/* Added closing tag */}
+                      </InputGroup.Text>
                       <Form.Control type="text" name="firstname" placeholder="First Name" />
                     </InputGroup>
                   </Col>
                   <Col>
                     <Form.Label>Last Name</Form.Label>
                     <InputGroup>
-                      <InputGroup.Text> {/* Added closing tag */}
+                      <InputGroup.Text>
                         <PersonFill />
-                      </InputGroup.Text> {/* Added closing tag */}
+                      </InputGroup.Text>
                       <Form.Control type="text" name="lastname" placeholder="Last Name" />
                     </InputGroup>
                   </Col>
@@ -107,9 +123,9 @@ const SignUp = ({ location }) => {
                 <Form.Group className="mb-2">
                   <Form.Label>Image</Form.Label>
                   <InputGroup>
-                    <InputGroup.Text> {/* Added closing tag */}
+                    <InputGroup.Text>
                       <Image />
-                    </InputGroup.Text> {/* Added closing tag */}
+                    </InputGroup.Text>
                     <Form.Control type="text" name="image" placeholder="Image URL" />
                   </InputGroup>
                 </Form.Group>
@@ -152,6 +168,29 @@ const SignUp = ({ location }) => {
                   <Form.Label>Description</Form.Label>
                   <Form.Control as="textarea" name="description" placeholder="Tell us more about you" rows={5} />
                 </Form.Group>
+                <Form.Group className="mb-2">
+                  <Form.Label>Tutor</Form.Label>
+                  <div>
+                    <Form.Check
+                      inline
+                      type="radio"
+                      label="Yes"
+                      name="tutor"
+                      id="tutor-yes"
+                      value="true"
+                    />
+                    <Form.Check
+                      inline
+                      type="radio"
+                      label="No"
+                      name="tutor"
+                      id="tutor-no"
+                      value="false"
+                      defaultChecked
+                    />
+                  </div>
+                </Form.Group>
+
                 <ErrorsField />
                 <SubmitField value="Register" />
               </Card.Body>
