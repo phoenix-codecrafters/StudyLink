@@ -7,20 +7,20 @@ const Users = new Mongo.Collection('Users');
 const UserSchema = new SimpleSchema({
   firstName: {
     type: String,
-    optional: false,
+    optional: true,
   },
   lastName: {
     type: String,
-    optional: false,
+    optional: true,
   },
   email: {
     type: String,
     regEx: SimpleSchema.RegEx.Email,
-    optional: false,
+    optional: true,
   },
   password: {
     type: String,
-    optional: false,
+    optional: true,
   },
   classStanding: {
     type: String,
@@ -47,7 +47,7 @@ const UserSchema = new SimpleSchema({
   },
   coursename: {
     type: String,
-    optional: false,
+    optional: true,
     custom() {
       const validCourseNames = [
         'ICS 101',

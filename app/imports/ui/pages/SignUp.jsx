@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link, Navigate } from 'react-router-dom';
-import { Accounts, Meteor } from 'meteor/accounts-base';
+import { Accounts } from 'meteor/accounts-base';
 import { Alert, Card, Col, Container, Row, Form, InputGroup } from 'react-bootstrap';
 import SimpleSchema from 'simpl-schema';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
@@ -19,7 +19,11 @@ const majorOptions = [
     text: 'Information Technology Management (ITM)',
     value: 'Information Technology Management (ITM)',
   },
-  // Add more options as needed
+  {
+    key: 'Computer Engineering',
+    text: 'Computer Engineering',
+    value: 'Computer Engineering',
+  },
 ];
 
 const SignUp = ({ location }) => {
@@ -41,26 +45,13 @@ const SignUp = ({ location }) => {
   });
   const bridge = new SimpleSchema2Bridge(schema);
 
+  /* Handle SignUp submission. Create user account and a profile entry, then redirect to the home page. */
   const submit = (doc) => {
     const { email, password, firstname, lastname, coursename, image, major, subject, description, tutor } = doc;
-    Accounts.createUser({ email, password }, (err) => {
+    Accounts.createUser({ email, username: email, password, firstname, lastname, coursename, image, major, subject, description, tutor }, (err) => {
       if (err) {
-        setError(err.reason || 'An error occurred while creating the account.');
+        setError(err.reason);
       } else {
-        // User created successfully, now add additional data to the profile
-        const userId = Meteor.userId();
-        Meteor.users.update(userId, {
-          $set: {
-            'profile.firstname': firstname,
-            'profile.lastname': lastname,
-            'profile.coursename': coursename,
-            'profile.image': image,
-            'profile.major': major,
-            'profile.subject': subject,
-            'profile.description': description,
-            'profile.tutor': tutor,
-          },
-        });
         setError('');
         setRedirectToRef(true);
       }
@@ -190,7 +181,6 @@ const SignUp = ({ location }) => {
                     />
                   </div>
                 </Form.Group>
-
                 <ErrorsField />
                 <SubmitField value="Register" />
               </Card.Body>
