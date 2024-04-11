@@ -4,7 +4,7 @@
 /* Set up some CSS variables to theme the application. */
 :root {
   --matr-navbar-bg: #ECECEC;
-  --matr-navbar-bg-rgb: 236, 236, 236;
+  --matr-navbar-bg-rgb: 240, 255, 240;
 }
 
 /* Change bootstrap variable values.
@@ -12,6 +12,8 @@
  */
 body {
   --bs-light-rgb: var(--matr-navbar-bg-rgb);
+  background-image: url("https://wallpapers.com/images/high/mint-green-iphone-i2qecbihcqpnki1y.webp");
+  background-size: cover;
 }
 
 /* Set the alert background on the signin and signup pages. */
@@ -25,4 +27,15 @@ body {
   color: var(--bs-dark);
   padding-top: 10px;
   padding-bottom: 20px;
+}
+
+.custom-link {
+  text-decoration: none;
+  color: var(--bs-dark);;
+}
+
+#white-box {
+  background-color: white;
+  border: 2px black solid;
+  padding: 20px;
 }
