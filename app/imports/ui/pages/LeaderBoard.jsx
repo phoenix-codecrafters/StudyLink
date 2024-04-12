@@ -28,7 +28,7 @@ const LeaderBoard = () => {
       <Row className="justify-content-center">
         <Col md={7}>
           <Col className="text-center">
-            <h2>LeaderBoard</h2>
+            <h2>Leaderboard</h2>
           </Col>
           <Table striped bordered hover>
             <thead>
