@@ -1,4 +1,5 @@
 import React from 'react';
+import { Container } from 'react-bootstrap';
 
 const developers = [
   {
@@ -46,17 +47,19 @@ const developers = [
 const AboutUs = () => (
   <div style={{ textAlign: 'center' }}>
     <h2 style={{ marginBottom: '20px', marginTop: '20px' }}>Meet the Developers</h2>
-    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '20px', justifyContent: 'center', margin: '10px', padding: '10px' }}>
-      {developers.map(developer => (
-        <div key={developer.id} style={{ border: '1px solid #ccc', padding: '20px', textAlign: 'center' }}>
-          <img src={developer.imageUrl} alt={developer.name} style={{ maxWidth: '100%', height: 'auto' }} />
-          <h3 style={{ marginTop: '10px' }}>{developer.name}</h3>
-          <p style={{ marginTop: '5px' }}>{developer.description}</p>
-          <a href={developer.githubUrl} target="_blank" rel="noopener noreferrer" style={{ display: 'block', marginTop: '10px' }}>GitHub</a>
-          <a href={developer.PortfolioUrl} target="_blank" rel="noopener noreferrer" style={{ display: 'block', marginTop: '10px' }}>Professional Portfolio</a>
-        </div>
-      ))}
-    </div>
+    <Container id="white-box">
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '20px', justifyContent: 'center', margin: '10px', padding: '10px' }}>
+        {developers.map(developer => (
+          <div key={developer.id} style={{ border: '1px solid #ccc', padding: '20px', textAlign: 'center' }}>
+            <img src={developer.imageUrl} alt={developer.name} style={{ maxWidth: '100%', height: 'auto' }}/>
+            <h3 style={{ marginTop: '10px' }}>{developer.name}</h3>
+            <p style={{ marginTop: '5px' }}>{developer.description}</p>
+            <a href={developer.githubUrl} target="_blank" rel="noopener noreferrer" style={{ display: 'block', marginTop: '10px' }}>GitHub</a>
+            <a href={developer.PortfolioUrl} target="_blank" rel="noopener noreferrer" style={{ display: 'block', marginTop: '10px' }}>Professional Portfolio</a>
+          </div>
+        ))}
+      </div>
+    </Container>
   </div>
 );
 
