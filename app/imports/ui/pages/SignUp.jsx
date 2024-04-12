@@ -121,10 +121,6 @@ const SignUp = ({ location }) => {
                   </InputGroup>
                 </Form.Group>
                 <Form.Group className="mb-2">
-                  <Form.Label>Course Name</Form.Label>
-                  <Form.Control type="text" name="coursename" placeholder="Course Name" />
-                </Form.Group>
-                <Form.Group className="mb-2">
                   <Form.Label>Class Standing</Form.Label>
                   <Form.Select name="classStanding">
                     <option>Choose...</option>
@@ -150,10 +146,6 @@ const SignUp = ({ location }) => {
                       ))}
                     </Form.Select>
                   </InputGroup>
-                </Form.Group>
-                <Form.Group className="mb-2">
-                  <Form.Label>Subject</Form.Label>
-                  <Form.Control type="text" name="subject" placeholder="Subject" />
                 </Form.Group>
                 <Form.Group className="mb-2">
                   <Form.Label>Description</Form.Label>
