@@ -159,28 +159,6 @@ const SignUp = ({ location }) => {
                   <Form.Label>Description</Form.Label>
                   <Form.Control as="textarea" name="description" placeholder="Tell us more about you" rows={5} />
                 </Form.Group>
-                <Form.Group className="mb-2">
-                  <Form.Label>Tutor</Form.Label>
-                  <div>
-                    <Form.Check
-                      inline
-                      type="radio"
-                      label="Yes"
-                      name="tutor"
-                      id="tutor-yes"
-                      value="true"
-                    />
-                    <Form.Check
-                      inline
-                      type="radio"
-                      label="No"
-                      name="tutor"
-                      id="tutor-no"
-                      value="false"
-                      defaultChecked
-                    />
-                  </div>
-                </Form.Group>
                 <ErrorsField />
                 <SubmitField value="Register" />
               </Card.Body>
