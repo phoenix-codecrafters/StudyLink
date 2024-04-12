@@ -1,4 +1,9 @@
 {
+  "monti": {
+    "appId": "7CkibqkEkQMTADz3L",
+    "appSecret": "6e02729b-e029-4a2c-94e3-cb4f22f8d88b"
+  },
+
   "defaultAccounts": [
     { "email": "admin@foo.com", "password": "changeme", "role": "admin", "classStanding": "graduate", "major": "Information and Computer Sciences (ICS)"},
     { "email": "john@foo.com", "password": "changeme", "classStanding": "graduate", "major": "Information and Computer Sciences (ICS)" }
@@ -8,9 +13,5 @@
     { "name": "Bicycle", "quantity": 2, "owner": "john@foo.com", "condition": "poor" },
     { "name": "Banana", "quantity": 2, "owner": "admin@foo.com", "condition": "good" },
     { "name": "Boogie Board", "quantity": 2, "owner": "admin@foo.com", "condition": "excellent" }
-  ],
-  "monti": {
-    "appId": "changeme",
-    "appSecret": "changeme"
-  }
+  ]
 }
