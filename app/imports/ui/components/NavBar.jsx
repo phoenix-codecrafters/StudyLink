@@ -29,10 +29,10 @@ const NavBar = () => {
             {currentUser ? ([
               <Nav.Link id="calender" as={NavLink} to="/calendar" key="calendar">My Calendar</Nav.Link>,
               <Nav.Link id="course-manager" as={NavLink} to="/course-manager" key="course-manager">Course Manager</Nav.Link>,
-             <Nav.Link id="list-stuff-nav" as={NavLink} to="/leader" key="list">Leaderboard</Nav.Link>,
+              <Nav.Link id="list-stuff-nav" as={NavLink} to="/leader" key="list">Leaderboard</Nav.Link>,
             ]) : ([
               <Nav.Link id="about-us-nav" as={NavLink} to="/about-us" key="about-us">About Us</Nav.Link>,
-              <Nav.Link id="rules-and-regulations" as={NavLink} to="/rulesandregulations" key="rulesandregulations">Rules and Regulations</Nav.Link>,
+              <Nav.Link id="rules-and-regulations" as={NavLink} to="/RulesAndRegulations" key="rulesandregulations">Rules and Regulations</Nav.Link>,
             ])}
           </Nav>
           <Nav className="justify-content-end">
