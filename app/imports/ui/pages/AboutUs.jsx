@@ -1,5 +1,4 @@
 import React from 'react';
-import { Container } from 'react-bootstrap';
 
 const developers = [
   {
@@ -49,8 +48,8 @@ const AboutUs = () => (
     <h2 style={{ marginBottom: '20px', marginTop: '20px' }}>Meet the Developers</h2>
     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '20px', justifyContent: 'center', margin: '10px', padding: '10px' }}>
       {developers.map(developer => (
-        <div key={developer.id} style={{ border: '1px solid #ccc', padding: '20px', textAlign: 'center', backgroundColor: 'white' }}>
-          <img src={developer.imageUrl} alt={developer.name} style={{ maxWidth: '100%', height: 'auto' }} />
+        <div key={developer.id} style={{ border: '2px solid black', padding: '20px', textAlign: 'center', backgroundColor: 'white' }}>
+          <img src={developer.imageUrl} alt={developer.name} style={{ maxWidth: '100%', height: 'auto', radius: '50%' }} />
           <h3 style={{ marginTop: '10px' }}>{developer.name}</h3>
           <p style={{ marginTop: '5px' }}>{developer.description}</p>
           <a href={developer.githubUrl} target="_blank" rel="noopener noreferrer" style={{ display: 'block', marginTop: '10px' }}>GitHub</a>
