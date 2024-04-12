@@ -16,19 +16,23 @@ const NavBar = () => {
     <Navbar bg="light" expand="lg">
       <Container>
         <Navbar.Brand as={NavLink} to="/">
-          <h2>StudyLink</h2>
+          <h1>StudyLink</h1>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto justify-content-start">
-            <Nav.Link id="about-us-nav" as={NavLink} to="/about-us" key="about-us">About Us</Nav.Link>
-            {currentUser ? ([
-              <Nav.Link id="add-stuff-nav" as={NavLink} to="/add" key="add">Add Stuff</Nav.Link>,
-              <Nav.Link id="list-stuff-nav" as={NavLink} to="/list" key="list">List Stuff</Nav.Link>,
+            {Roles.userIsInRole(Meteor.userId(), 'admin') ? ([
+              <Nav.Link id="admin-sensei-panel" as={NavLink} to="/admin" key="admin">Sensei Panel</Nav.Link>,
+              <Nav.Link id="admin-grasshopper-panel" as={NavLink} to="/admin" key="admin">Grasshopper Panel</Nav.Link>,
             ]) : ''}
-            {Roles.userIsInRole(Meteor.userId(), 'admin') ? (
-              <Nav.Link id="list-stuff-admin-nav" as={NavLink} to="/admin" key="admin">Admin</Nav.Link>
-            ) : ''}
+            {currentUser ? ([
+              <Nav.Link id="calender" as={NavLink} to="/calendar" key="calendar">My Calendar</Nav.Link>,
+              <Nav.Link id="course-manager" as={NavLink} to="/course-manager" key="course-manager">Course Manager</Nav.Link>,
+             <Nav.Link id="list-stuff-nav" as={NavLink} to="/leader" key="list">Leaderboard</Nav.Link>,
+            ]) : ([
+              <Nav.Link id="about-us-nav" as={NavLink} to="/about-us" key="about-us">About Us</Nav.Link>,
+              <Nav.Link id="rules-and-regulations" as={NavLink} to="/rulesandregulations" key="rulesandregulations">Rules and Regulations</Nav.Link>,
+            ])}
           </Nav>
           <Nav className="justify-content-end">
             {currentUser === '' ? (
