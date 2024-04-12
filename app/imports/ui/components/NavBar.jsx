@@ -16,7 +16,6 @@ const NavBar = () => {
     <Navbar bg="light" expand="lg">
       <Container>
         <Navbar.Brand as={NavLink} to="/">
-
           <h1>StudyLink</h1>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -31,7 +30,7 @@ const NavBar = () => {
               <Nav.Link id="course-manager" as={NavLink} to="/course-manager" key="course-manager">Course Manager</Nav.Link>,
              <Nav.Link id="list-stuff-nav" as={NavLink} to="/leader" key="list">Leaderboard</Nav.Link>,
             ]) : ([
-              <Nav.Link id="about-us-nav" as={NavLink} to="/aboutus" key="aboutus">About Us</Nav.Link>,
+              <Nav.Link id="about-us-nav" as={NavLink} to="/about-us" key="about-us">About Us</Nav.Link>,
               <Nav.Link id="rules-and-regulations" as={NavLink} to="/rulesandregulations" key="rulesandregulations">Rules and Regulations</Nav.Link>,
             ])}
           </Nav>
@@ -40,22 +39,18 @@ const NavBar = () => {
               <NavDropdown id="login-dropdown" title="Login">
                 <NavDropdown.Item id="login-dropdown-sign-in" as={NavLink} to="/signin">
                   <PersonFill />
-                  Sign
-                  in
+                  Sign in
                 </NavDropdown.Item>
                 <NavDropdown.Item id="login-dropdown-sign-up" as={NavLink} to="/signup">
                   <PersonPlusFill />
-                  Sign
-                  up
+                  Sign up
                 </NavDropdown.Item>
               </NavDropdown>
             ) : (
               <NavDropdown id="navbar-current-user" title={currentUser}>
                 <NavDropdown.Item id="navbar-sign-out" as={NavLink} to="/signout">
                   <BoxArrowRight />
-                  {' '}
-                  Sign
-                  out
+                  Sign out
                 </NavDropdown.Item>
               </NavDropdown>
             )}
