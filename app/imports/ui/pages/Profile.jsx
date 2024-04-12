@@ -42,7 +42,7 @@ const Profile = () => {
             <div className="d-flex flex-wrap">
               <h2 className="">Class Standing:</h2>
               <div className="my-2 d-flex">
-                <input className="mx-5" type="text" placeholder="replace" disabled />
+                <input className="mx-5" type="text" placeholder={user.major} disabled />
               </div>
             </div>
             <div className="d-flex flex-wrap">
