@@ -2,11 +2,10 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link, Navigate } from 'react-router-dom';
 import { Accounts } from 'meteor/accounts-base';
-import { Alert, Card, Col, Container, Row, Form, InputGroup } from 'react-bootstrap';
+import { Alert, Card, Col, Container, Row } from 'react-bootstrap';
 import SimpleSchema from 'simpl-schema';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import { AutoForm, ErrorsField, SelectField, SubmitField, TextField } from 'uniforms-bootstrap5';
-import { PersonFill, LockFill, Image, Journal, Textarea } from 'react-bootstrap-icons';
 
 const SignUp = ({ location }) => {
   const [error, setError] = useState('');
