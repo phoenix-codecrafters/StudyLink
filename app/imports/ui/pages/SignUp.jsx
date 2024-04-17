@@ -35,20 +35,17 @@ const SignUp = ({ location }) => {
     password: String,
     firstname: String,
     lastname: String,
-    coursename: String,
     classStanding: String,
     image: String,
     major: String,
-    subject: String,
-    tutor: Boolean,
     description: String,
   });
   const bridge = new SimpleSchema2Bridge(schema);
 
   /* Handle SignUp submission. Create user account and a profile entry, then redirect to the home page. */
   const submit = (doc) => {
-    const { email, password, firstname, lastname, coursename, image, major, subject, description, tutor } = doc;
-    Accounts.createUser({ email, username: email, password, firstname, lastname, coursename, image, major, subject, description, tutor }, (err) => {
+    const { email, password, firstname, lastname, image, major, description, tutor } = doc;
+    Accounts.createUser({ email, username: email, password, firstname, lastname, image, major, description, tutor }, (err) => {
       if (err) {
         setError(err.reason);
       } else {
