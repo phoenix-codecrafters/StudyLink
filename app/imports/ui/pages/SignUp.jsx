@@ -62,18 +62,24 @@ const SignUp = ({ location }) => {
           <AutoForm schema={bridge} onSubmit={handleSubmit}>
             <Card>
               <Card.Body>
-                <TextField type="email" name="email" placeholder="E-mail address" />
-                <TextField type="password" name="password" placeholder="Password" />
-                <TextField type="text" name="firstname" placeholder="First Name" />
-                <TextField type="text" name="lastname" placeholder="Last Name" />
-                <TextField type="text" name="image" placeholder="Image URL" />
-                <SelectField name="classStanding" placeholder="Choose one...">
+                <TextField type="email" name="email" label="E-Mail:" placeholder="E-mail address" />
+                <TextField type="password" name="password" label="Password:" placeholder="Password" />
+                <Row>
+                  <Col>
+                    <TextField type="text" name="firstname" label="First Name:" placeholder="First Name" />
+                  </Col>
+                  <Col>
+                    <TextField type="text" name="lastname" label="Last Name:" placeholder="Last Name" />
+                  </Col>
+                </Row>
+                <TextField type="text" name="image" label="Image Url:" placeholder="Image URL" />
+                <SelectField name="classStanding" label="Grade Status:" placeholder="Choose...">
                   options= {['Freshman', 'Sophomore', 'Junior', 'Senior', 'Graduate']}
                 </SelectField>
-                <SelectField name="major">
+                <SelectField label="Focus:" name="major" placeholder="Choose...">
                   options= {['Information and Computer Sciences (ICS)', 'Information Technology Management (ITM)', 'Computer Engineering']}
                 </SelectField>
-                <TextField as="textarea" name="description" placeholder="Tell us more about you" rows={5} />
+                <TextField as="textarea" name="description" label="Description:" placeholder="Tell us more about you" />
                 <ErrorsField />
                 <SubmitField value="Register" />
               </Card.Body>

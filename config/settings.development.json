@@ -7,19 +7,21 @@
   "defaultAccounts": [
     { "email": "admin@foo.com", "password": "changeme",
       "profile": {
-        "firstname": "test",
-        "lastname": "test",
-        "image": "test",
-        "major": "test",
-        "description": "test"
+        "firstname": "adminname",
+        "lastname": "siradmin",
+        "image": "adminimage",
+        "classStanding": "Freshman",
+        "major": "adminmajor",
+        "description": "i am admin"
       }, "role": "admin" },
     { "email": "john@foo.com", "password": "changeme",
       "profile": {
-        "firstname": "test",
-        "lastname": "test",
-        "image": "test",
-        "major": "test",
-        "description": "test"
+        "firstname": "john",
+        "lastname": "foo",
+        "image": "johnimage",
+        "classStanding": "Freshman",
+        "major": "johnMajor",
+        "description": "I am John"
       }
     }
   ],
