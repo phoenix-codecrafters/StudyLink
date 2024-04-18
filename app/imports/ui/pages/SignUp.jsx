@@ -2,29 +2,10 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link, Navigate } from 'react-router-dom';
 import { Accounts } from 'meteor/accounts-base';
-import { Alert, Card, Col, Container, Row, Form, InputGroup } from 'react-bootstrap';
+import { Alert, Card, Col, Container, Row } from 'react-bootstrap';
 import SimpleSchema from 'simpl-schema';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
-import { AutoForm, ErrorsField, SubmitField } from 'uniforms-bootstrap5';
-import { PersonFill, LockFill, Image, Journal } from 'react-bootstrap-icons';
-
-const majorOptions = [
-  {
-    key: 'Information and Computer Sciences (ICS)',
-    text: 'Information and Computer Sciences (ICS)',
-    value: 'Information and Computer Sciences (ICS)',
-  },
-  {
-    key: 'Information Technology Management (ITM)',
-    text: 'Information Technology Management (ITM)',
-    value: 'Information Technology Management (ITM)',
-  },
-  {
-    key: 'Computer Engineering',
-    text: 'Computer Engineering',
-    value: 'Computer Engineering',
-  },
-];
+import { AutoForm, ErrorsField, SelectField, SubmitField, TextField } from 'uniforms-bootstrap5';
 
 const SignUp = ({ location }) => {
   const [error, setError] = useState('');
@@ -35,17 +16,24 @@ const SignUp = ({ location }) => {
     password: String,
     firstname: String,
     lastname: String,
-    classStanding: String,
     image: String,
-    major: String,
+    classStanding: {
+      type: String,
+      allowedValues: ['Freshman', 'Sophomore', 'Junior', 'Senior', 'Graduate'],
+    },
+    major: {
+      type: String,
+      allowedValues: ['Information and Computer Sciences (ICS)', 'Information Technology Management (ITM)', 'Computer Engineering'],
+    },
     description: String,
   });
   const bridge = new SimpleSchema2Bridge(schema);
 
   /* Handle SignUp submission. Create user account and a profile entry, then redirect to the home page. */
   const submit = (doc) => {
-    const { email, password, firstname, lastname, image, major, description, tutor } = doc;
-    Accounts.createUser({ email, username: email, password, firstname, lastname, image, major, description, tutor }, (err) => {
+    const { email, password, firstname, lastname, image, classStanding, major, description } = doc;
+    const profile = { firstname: firstname, lastname: lastname, image: image, classStanding: classStanding, major: major, description: description };
+    Accounts.createUser({ email, username: email, password, profile }, (err) => {
       if (err) {
         setError(err.reason);
       } else {
@@ -60,6 +48,10 @@ const SignUp = ({ location }) => {
     return <Navigate to={from} />;
   }
 
+  const handleSubmit = (data) => {
+    submit(data);
+  };
+
   return (
     <Container id="signup-page" className="py-3">
       <Row className="justify-content-center">
@@ -67,87 +59,27 @@ const SignUp = ({ location }) => {
           <div className="text-center">
             <h2>Register your account</h2>
           </div>
-          <AutoForm schema={bridge} onSubmit={data => submit(data)}>
+          <AutoForm schema={bridge} onSubmit={handleSubmit}>
             <Card>
               <Card.Body>
-                <Form.Group className="mb-2">
-                  <Form.Label>Email</Form.Label>
-                  <InputGroup>
-                    <InputGroup.Text>
-                      <PersonFill />
-                    </InputGroup.Text>
-                    <Form.Control type="email" name="email" placeholder="E-mail address" />
-                  </InputGroup>
-                </Form.Group>
-                <Form.Group className="mb-2">
-                  <Form.Label>Password</Form.Label>
-                  <InputGroup>
-                    <InputGroup.Text>
-                      <LockFill />
-                    </InputGroup.Text>
-                    <Form.Control type="password" name="password" placeholder="Password" />
-                  </InputGroup>
-                </Form.Group>
-                <Form.Group as={Row} className="mb-2">
+                <TextField type="email" name="email" label="E-Mail:" placeholder="E-mail address" />
+                <TextField type="password" name="password" label="Password:" placeholder="Password" />
+                <Row>
                   <Col>
-                    <Form.Label>First Name</Form.Label>
-                    <InputGroup>
-                      <InputGroup.Text>
-                        <PersonFill />
-                      </InputGroup.Text>
-                      <Form.Control type="text" name="firstname" placeholder="First Name" />
-                    </InputGroup>
+                    <TextField type="text" name="firstname" label="First Name:" placeholder="First Name" />
                   </Col>
                   <Col>
-                    <Form.Label>Last Name</Form.Label>
-                    <InputGroup>
-                      <InputGroup.Text>
-                        <PersonFill />
-                      </InputGroup.Text>
-                      <Form.Control type="text" name="lastname" placeholder="Last Name" />
-                    </InputGroup>
+                    <TextField type="text" name="lastname" label="Last Name:" placeholder="Last Name" />
                   </Col>
-                </Form.Group>
-                <Form.Group className="mb-2">
-                  <Form.Label>Image</Form.Label>
-                  <InputGroup>
-                    <InputGroup.Text>
-                      <Image />
-                    </InputGroup.Text>
-                    <Form.Control type="text" name="image" placeholder="Image URL" />
-                  </InputGroup>
-                </Form.Group>
-                <Form.Group className="mb-2">
-                  <Form.Label>Class Standing</Form.Label>
-                  <Form.Select name="classStanding">
-                    <option>Choose...</option>
-                    <option value="freshman">Freshman</option>
-                    <option value="sophomore">Sophomore</option>
-                    <option value="junior">Junior</option>
-                    <option value="senior">Senior</option>
-                    <option value="graduate">Graduate</option>
-                  </Form.Select>
-                </Form.Group>
-                <Form.Group className="mb-2">
-                  <Form.Label>Major</Form.Label>
-                  <InputGroup>
-                    <InputGroup.Text>
-                      <Journal />
-                    </InputGroup.Text>
-                    <Form.Select name="major">
-                      <option>Choose a major...</option>
-                      {majorOptions.map((option) => (
-                        <option key={option.key} value={option.value}>
-                          {option.text}
-                        </option>
-                      ))}
-                    </Form.Select>
-                  </InputGroup>
-                </Form.Group>
-                <Form.Group className="mb-2">
-                  <Form.Label>Description</Form.Label>
-                  <Form.Control as="textarea" name="description" placeholder="Tell us more about you" rows={5} />
-                </Form.Group>
+                </Row>
+                <TextField type="text" name="image" label="Image Url:" placeholder="Image URL" />
+                <SelectField name="classStanding" label="Grade Status:" placeholder="Choose...">
+                  options= {['Freshman', 'Sophomore', 'Junior', 'Senior', 'Graduate']}
+                </SelectField>
+                <SelectField label="Focus:" name="major" placeholder="Choose...">
+                  options= {['Information and Computer Sciences (ICS)', 'Information Technology Management (ITM)', 'Computer Engineering']}
+                </SelectField>
+                <TextField as="textarea" name="description" label="Description:" placeholder="Tell us more about you" />
                 <ErrorsField />
                 <SubmitField value="Register" />
               </Card.Body>
