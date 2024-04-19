@@ -5,8 +5,25 @@
   },
 
   "defaultAccounts": [
-    { "email": "admin@foo.com", "password": "changeme", "role": "admin" },
-    { "email": "john@foo.com", "password": "changeme" }
+    { "email": "admin@foo.com", "password": "changeme",
+      "profile": {
+        "firstname": "adminname",
+        "lastname": "siradmin",
+        "image": "adminimage",
+        "classStanding": "Freshman",
+        "major": "adminmajor",
+        "description": "i am admin"
+      }, "role": "admin" },
+    { "email": "john@foo.com", "password": "changeme",
+      "profile": {
+        "firstname": "john",
+        "lastname": "foo",
+        "image": "johnimage",
+        "classStanding": "Freshman",
+        "major": "johnMajor",
+        "description": "I am John"
+      }
+    }
   ],
 
   "defaultData": [
