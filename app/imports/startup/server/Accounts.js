@@ -9,14 +9,7 @@ const createUser = (email, password, profile, role) => {
     username: email,
     email: email,
     password: password,
-    profile: { // Storing additional user information within the profile object
-      firstname: firstname,
-      lastname: lastname,
-      classStanding: classStanding,
-      image: image,
-      major: major,
-      description: description,
-    },
+    profile: profile,
   });
   if (role === 'admin') {
     Roles.createRole(role, { unlessExists: true });
