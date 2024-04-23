@@ -5,25 +5,13 @@
   },
 
   "defaultAccounts": [
-    { "email": "admin@foo.com", "password": "changeme",
-      "profile": {
-        "firstname": "adminname",
-        "lastname": "siradmin",
-        "image": "https://media.istockphoto.com/id/1327592506/vector/default-avatar-photo-placeholder-icon-grey-profile-picture-business-man.jpg?s=612x612&w=0&k=20&c=BpR0FVaEa5F24GIw7K8nMWiiGmbb8qmhfkpXcp1dhQg=",
-        "classStanding": "Freshman",
-        "major": "adminmajor",
-        "description": "i am admin"
-      }, "role": "admin" },
-    { "email": "john@foo.com", "password": "changeme",
-      "profile": {
-        "firstname": "john",
-        "lastname": "foo",
-        "image": "https://media.istockphoto.com/id/1327592506/vector/default-avatar-photo-placeholder-icon-grey-profile-picture-business-man.jpg?s=612x612&w=0&k=20&c=BpR0FVaEa5F24GIw7K8nMWiiGmbb8qmhfkpXcp1dhQg=",
-        "classStanding": "Freshman",
-        "major": "johnMajor",
-        "description": "I am John"
-      }
-    }
+    { "email": "admin@foo.com", "password": "changeme", "role": "admin" },
+    { "email": "john@foo.com", "password": "changeme"}
+  ],
+
+  "defaultProfiles": [
+    {"firstname": "admin", "lastname": "siradmin", "image": "adminimage", "classStanding": "Freshman", "major": "Information and Computer Sciences (ICS)", "description": "i am admin", "owner":  "admin@foo.com"},
+    {"firstname": "John", "lastname": "Foo", "image": "johnimage", "classStanding": "Sophomore", "major": "Information and Computer Sciences (ICS)", "description": "i am john", "owner":  "john@foo.com"}
   ],
 
   "defaultData": [
