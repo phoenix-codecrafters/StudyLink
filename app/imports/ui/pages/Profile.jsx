@@ -1,92 +1,74 @@
 import React from 'react';
-import { Meteor } from 'meteor/meteor';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import { Card, Col, Container, Row, Image } from 'react-bootstrap';
-import SimpleSchema from 'simpl-schema';
+import { AutoForm, ErrorsField, LongTextField, SubmitField, TextField, SelectField } from 'uniforms-bootstrap5';
+import { Link } from 'react-router-dom';
+import { Meteor } from 'meteor/meteor';
+import { useTracker } from 'meteor/react-meteor-data';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
-import { AutoForm, ErrorsField, SelectField, SubmitField, TextField } from 'uniforms-bootstrap5';
+import { Profiles } from '../../api/profile/Profile';
+import LoadingSpinner from '../components/LoadingSpinner';
 
+const bridge = new SimpleSchema2Bridge(Profiles.schema);
+
+/* Renders the EditContact page for editing a single document. */
 const Profile = () => {
   const user = Meteor.user();
 
   if (!user) {
     return <div>How did you get here?... Go Back</div>;
   }
-
-  const schema = new SimpleSchema({
-    email: String,
-    password: String,
-    firstname: String,
-    lastname: String,
-    image: String,
-    classStanding: {
-      type: String,
-      allowedValues: ['Freshman', 'Sophomore', 'Junior', 'Senior', 'Graduate'],
-    },
-    major: {
-      type: String,
-      allowedValues: ['Information and Computer Sciences (ICS)', 'Information Technology Management (ITM)', 'Computer Engineering'],
-    },
-    description: String,
+  // useTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
+  const { doc, ready } = useTracker(() => {
+    // Get access to Contact documents.
+    const subscription = Meteor.subscribe(Profiles.userPublicationName);
+    // Determine if the subscription is ready
+    const rdy = subscription.ready();
+    // Get the document
+    const document = Profiles.collection.find({ owner: user.username }).fetch();
+    return {
+      doc: document[0],
+      ready: rdy,
+    };
   });
-  const bridge = new SimpleSchema2Bridge(schema);
-  return (
-    <Container id="signup-page" className="py-3">
-      <Row className="justify-content-center">
-        <Col xs={12} md={6}>
-          <div className="text-center">
-            <h2>My Profile</h2>
-          </div>
-          <AutoForm schema={bridge}>
+  // console.log('EditContact', doc, ready);
+  return ready ? (
+    <Container className="py-3">
+      <Row>
+        <Col className="text-center"><h2>My Profile</h2></Col>
+        <Container className="d-flex justify-content-center">
+          <AutoForm schema={bridge} model={doc}>
             <Card>
               <Card.Body>
                 <Row>
                   <Col>
-                    <TextField type="email" name="email" label="E-Mail:" value={user.emails[0].address} placeholder="E-mail address" disabled />
-                    <TextField type="password" name="password" label="Password:" value="**********" placeholder="Password" disabled />
+                    <TextField type="text" name="firstname" label="First Name:" disabled />
+                    <TextField type="text" name="lastname" label="Last Name:" disabled />
                   </Col>
-                  <Col xs={4} className="d-flex justify-content-center">
-                    <Image className="pro-pic-image" src={user.profile.image} />
-                  </Col>
-                </Row>
-                <Row>
-                  <Col>
-                    <TextField type="text" name="firstname" label="First Name:" value={user.profile.firstname} placeholder="First Name" disabled />
-                  </Col>
-                  <Col>
-                    <TextField type="text" name="lastname" label="Last Name:" value={user.profile.lastname} placeholder="Last Name" disabled />
+                  <Col className="d-flex justify-content-center">
+                    <Image className="pro-pic-image" src={doc.image} />
                   </Col>
                 </Row>
-                <TextField type="text" name="image" label="Image Url:" value={user.profile.image} placeholder="Image URL" disabled />
-                <SelectField name="classStanding" label="Grade Status:" value={user.profile.classStanding} placeholder="Choose..." disabled>
+                <TextField type="text" name="image" label="Image Url:" placeholder="Image URL" disabled />
+                <SelectField name="classStanding" label="Grade Status:" placeholder="Choose..." disabled>
                   options= {['Freshman', 'Sophomore', 'Junior', 'Senior', 'Graduate']}
                 </SelectField>
-                <SelectField label="Focus:" name="major" value={user.profile.major} placeholder="Choose..." disabled>
+                <SelectField label="Focus:" name="major" placeholder="Choose..." disabled>
                   options= {['Information and Computer Sciences (ICS)', 'Information Technology Management (ITM)', 'Computer Engineering']}
                 </SelectField>
-                <TextField as="textarea" name="description" label="Description:" value={user.profile.description} placeholder="Tell us more about you" disabled />
+                <LongTextField as="textarea" name="description" label="Description:" placeholder="Tell us more about you" disabled />
                 <ErrorsField />
-                <Link to="/editprofile">
-                  <SubmitField value="Edit" />
-                </Link>
+                <Row className="d-flex justify-content-end">
+                  <Link to="/editprofile">
+                    <SubmitField value="Edit" />
+                  </Link>
+                </Row>
               </Card.Body>
             </Card>
           </AutoForm>
-        </Col>
+        </Container>
       </Row>
     </Container>
-  );
-};
-
-Profile.propTypes = {
-  location: PropTypes.shape({
-    state: PropTypes.string,
-  }),
-};
-
-Profile.defaultProps = {
-  location: { state: '' },
+  ) : <LoadingSpinner />;
 };
 
 export default Profile;

@@ -10,8 +10,8 @@
   ],
 
   "defaultProfiles": [
-    {"firstname": "admin", "lastname": "siradmin", "image": "adminimage", "classStanding": "Freshman", "major": "Information and Computer Sciences (ICS)", "description": "i am admin", "owner":  "admin@foo.com"},
-    {"firstname": "John", "lastname": "Foo", "image": "johnimage", "classStanding": "Sophomore", "major": "Information and Computer Sciences (ICS)", "description": "i am john", "owner":  "john@foo.com"}
+    {"firstname": "admin", "lastname": "siradmin", "image": "https://upload.wikimedia.org/wikipedia/commons/2/2c/Default_pfp.svg", "classStanding": "Freshman", "major": "Information and Computer Sciences (ICS)", "description": "i am admin", "owner":  "admin@foo.com"},
+    {"firstname": "John", "lastname": "Foo", "image": "https://upload.wikimedia.org/wikipedia/commons/2/2c/Default_pfp.svg", "classStanding": "Sophomore", "major": "Information and Computer Sciences (ICS)", "description": "i am john", "owner":  "john@foo.com"}
   ],
 
   "defaultData": [
