@@ -2,7 +2,7 @@ import React from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 
 const RulesAndRegulations = () => (
-  <Container className="my-auto py-3 ">
+  <Container id="rules-and-reg" className="my-auto py-3 ">
     <Row className="d-flex justify-content-center pb-2">
       <Col md={10}>
         <Col className="text-center py-3">
