@@ -1,7 +1,7 @@
 import React from 'react';
+import swal from 'sweetalert';
 import { Card, Col, Container, Row, Image } from 'react-bootstrap';
 import { AutoForm, ErrorsField, LongTextField, SubmitField, TextField, SelectField } from 'uniforms-bootstrap5';
-import { Link } from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';
 import { useTracker } from 'meteor/react-meteor-data';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
@@ -11,7 +11,7 @@ import LoadingSpinner from '../components/LoadingSpinner';
 const bridge = new SimpleSchema2Bridge(Profiles.schema);
 
 /* Renders the EditContact page for editing a single document. */
-const Profile = () => {
+const EditProfile = () => {
   const user = Meteor.user();
 
   if (!user) {
@@ -30,37 +30,40 @@ const Profile = () => {
       ready: rdy,
     };
   });
-  // console.log('EditContact', doc, ready);
+  const submit = (data) => {
+    const { firstname, lastname, image, classStanding, major, description } = data;
+    Profiles.collection.update(doc._id, { $set: { firstname, lastname, image, classStanding, major, description } }, (error) => (error ?
+      swal('Error', error.message, 'error') :
+      swal('Success', 'Item updated successfully', 'success')));
+  };
   return ready ? (
     <Container className="py-3">
       <Row>
         <Col className="text-center"><h2>My Profile</h2></Col>
         <Container className="d-flex justify-content-center">
-          <AutoForm schema={bridge} model={doc}>
+          <AutoForm schema={bridge} onSubmit={data => submit(data)} model={doc}>
             <Card>
               <Card.Body>
                 <Row>
                   <Col>
-                    <TextField type="text" name="firstname" label="First Name:" disabled />
-                    <TextField type="text" name="lastname" label="Last Name:" disabled />
+                    <TextField type="text" name="firstname" label="First Name:" />
+                    <TextField type="text" name="lastname" label="Last Name:" />
                   </Col>
                   <Col className="d-flex justify-content-center">
                     <Image className="pro-pic-image" src={doc.image} />
                   </Col>
                 </Row>
-                <TextField type="text" name="image" label="Image Url:" placeholder="Image URL" disabled />
-                <SelectField name="classStanding" label="Grade Status:" placeholder="Choose..." disabled>
+                <TextField type="text" name="image" label="Image Url:" placeholder="Image URL" />
+                <SelectField name="classStanding" label="Grade Status:" placeholder="Choose...">
                   options= {['Freshman', 'Sophomore', 'Junior', 'Senior', 'Graduate']}
                 </SelectField>
-                <SelectField label="Focus:" name="major" placeholder="Choose..." disabled>
+                <SelectField label="Focus:" name="major" placeholder="Choose...">
                   options= {['Information and Computer Sciences (ICS)', 'Information Technology Management (ITM)', 'Computer Engineering']}
                 </SelectField>
-                <LongTextField as="textarea" name="description" label="Description:" placeholder="Tell us more about you" disabled />
+                <LongTextField as="textarea" name="description" label="Description:" placeholder="Tell us more about you" />
                 <ErrorsField />
                 <Row className="d-flex justify-content-end">
-                  <Link to="/editprofile">
-                    <SubmitField value="Edit" />
-                  </Link>
+                  <SubmitField value="Submit" />
                 </Row>
               </Card.Body>
             </Card>
@@ -71,4 +74,4 @@ const Profile = () => {
   ) : <LoadingSpinner />;
 };
 
-export default Profile;
+export default EditProfile;
