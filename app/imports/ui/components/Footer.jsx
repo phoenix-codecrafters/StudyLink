@@ -54,7 +54,7 @@ const Footer = () => (
             </a>
           </Col>
         </Row>
-      </div>
+      </Col>
     </Container>
   </footer>
 );
