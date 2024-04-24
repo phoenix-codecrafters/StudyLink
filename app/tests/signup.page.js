@@ -12,7 +12,7 @@ class SignupPage {
     this.imageInput = Selector('input[name="image"]');
     this.majorSelect = Selector('select[name="major"]');
     this.classStandingSelect = Selector('select[name="classStanding"]');
-    this.descriptionInput = Selector('textarea[name="description"]');
+    this.descriptionInput = Selector('input[name="description"]');
     this.registerButton = Selector('button').withText('Register');
   }
 
@@ -28,9 +28,9 @@ class SignupPage {
     await testController.typeText(this.lastNameInput, userData.lastname);
     await testController.typeText(this.imageInput, userData.image);
     await testController.click(this.majorSelect);
+    await testController.click(Selector('option').withText(userData.classStanding));
     await testController.click(Selector('option').withText(userData.major));
     await testController.click(this.classStandingSelect);
-    await testController.click(Selector('option').withText(userData.classStanding));
     await testController.typeText(this.descriptionInput, userData.description);
     await testController.click(this.registerButton);
     await navBar.isLoggedIn(testController, userData.email);

@@ -5,7 +5,7 @@ import { Accounts } from 'meteor/accounts-base';
 import { Alert, Card, Col, Container, Row } from 'react-bootstrap';
 import SimpleSchema from 'simpl-schema';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
-import { AutoForm, ErrorsField, SubmitField, TextField, SelectField } from 'uniforms-bootstrap5';
+import { AutoForm, ErrorsField, SubmitField, TextField, SelectField, LongTextField } from 'uniforms-bootstrap5';
 import { Profiles } from '../../api/profile/Profile';
 
 /**
@@ -82,7 +82,7 @@ const SignUp = ({ location }) => {
                 <SelectField label="Focus:" name="major" placeholder="Choose...">
                   options= {['Information and Computer Sciences (ICS)', 'Information Technology Management (ITM)', 'Computer Engineering']}
                 </SelectField>
-                <TextField as="textarea" name="description" label="Description:" placeholder="Tell us more about you" />
+                <LongTextField name="description" label="Description:" placeholder="Tell us more about you" />
                 <ErrorsField />
                 <SubmitField value="Register" />
               </Card.Body>

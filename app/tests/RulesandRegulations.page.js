@@ -1,15 +1,15 @@
 import { Selector } from 'testcafe';
 
-class EditProfilePage {
+class RulesAndRegulations {
   constructor() {
-    this.pageId = '#editprofile-page';
+    this.pageId = '#rules-and-reg';
     this.pageSelector = Selector(this.pageId);
   }
 
-  /** Checks that this page is currently displayed. */
+  /** Asserts that this page is currently displayed. */
   async isDisplayed(testController) {
     await testController.expect(this.pageSelector.exists).ok();
   }
 }
 
-export const editProfilePage = new EditProfilePage();
+export const rulesandreg = new RulesAndRegulations();

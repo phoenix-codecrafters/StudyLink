@@ -3,6 +3,11 @@ import { signinPage } from './signin.page';
 import { signoutPage } from './signout.page';
 import { navBar } from './navbar.component';
 import { signupPage } from './signup.page';
+import { editProfilePage } from './editprofile.page';
+import { leaderBoard } from './leaderboard.page';
+import { aboutus } from './AboutUs.page';
+import { rulesandreg } from './RulesandRegulations.page';
+import { calendarPage } from './calendar.page';
 
 /* global fixture:false, test:false */
 
@@ -19,6 +24,16 @@ test('Test that landing page shows up', async (testController) => {
   await landingPage.isDisplayed(testController);
 });
 
+test('Test that About Us page displays', async (testController) => {
+  await navBar.goToAboutUs(testController);
+  await aboutus.isDisplayed(testController);
+});
+
+test('Test that Rules and Regulations page displays', async (testController) => {
+  await navBar.goToRulesRegulations(testController);
+  await rulesandreg.isDisplayed(testController);
+});
+
 test('Test that signin and signout work', async (testController) => {
   await navBar.gotoSignInPage(testController);
   await signinPage.signin(testController, credentials.username, credentials.password);
@@ -27,7 +42,31 @@ test('Test that signin and signout work', async (testController) => {
   await signoutPage.isDisplayed(testController);
 });
 
-test('Test that signup works', async (testController) => {
+test('Test that calendar page works', async (testController) => {
+  await navBar.gotoSignInPage(testController);
+  await signinPage.signin(testController, credentials.username, credentials.password);
+  await navBar.isLoggedIn(testController, credentials.username);
+  await navBar.goToCalendar(testController);
+  await calendarPage.isDisplayed(testController);
+});
+
+test('Test that leaderboard page works', async (testController) => {
+  await navBar.gotoSignInPage(testController);
+  await signinPage.signin(testController, credentials.username, credentials.password);
+  await navBar.isLoggedIn(testController, credentials.username);
+  await navBar.goToLeaderboard(testController);
+  await leaderBoard.isDisplayed(testController);
+});
+
+test('Test that edit profile works', async (testController) => {
+  await navBar.gotoSignInPage(testController);
+  await signinPage.signin(testController, credentials.username, credentials.password);
+  await navBar.isLoggedIn(testController, credentials.username);
+  await navBar.goToEditProfilePage(testController);
+  await editProfilePage.isDisplayed(testController);
+});
+
+test.only('Test that signup works', async (testController) => {
   await navBar.gotoSignUpPage(testController);
   await signupPage.signupUser(testController, userInfo);
   await navBar.isLoggedIn(testController, userInfo.email);
