@@ -37,7 +37,7 @@ const EditProfile = () => {
       swal('Success', 'Item updated successfully', 'success')));
   };
   return ready ? (
-    <Container className="py-3">
+    <Container id="editprofile-page" className="py-3">
       <Row>
         <Col className="text-center"><h2>My Profile</h2></Col>
         <Container className="d-flex justify-content-center">
@@ -46,21 +46,21 @@ const EditProfile = () => {
               <Card.Body>
                 <Row>
                   <Col>
-                    <TextField type="text" name="firstname" label="First Name:" />
-                    <TextField type="text" name="lastname" label="Last Name:" />
+                    <TextField id="edit-first-name" type="text" name="firstname" label="First Name:" />
+                    <TextField id="edit-last-name" type="text" name="lastname" label="Last Name:" />
                   </Col>
                   <Col className="d-flex justify-content-center">
                     <Image className="pro-pic-image" src={doc.image} />
                   </Col>
                 </Row>
-                <TextField type="text" name="image" label="Image Url:" placeholder="Image URL" />
-                <SelectField name="classStanding" label="Grade Status:" placeholder="Choose...">
+                <TextField type="edit-text" name="image" label="Image Url:" placeholder="Image URL" />
+                <SelectField id="class-standing" name="classStanding" label="Grade Status:" placeholder="Choose...">
                   options= {['Freshman', 'Sophomore', 'Junior', 'Senior', 'Graduate']}
                 </SelectField>
-                <SelectField label="Focus:" name="major" placeholder="Choose...">
+                <SelectField id="edit-major" label="Focus:" name="major" placeholder="Choose...">
                   options= {['Information and Computer Sciences (ICS)', 'Information Technology Management (ITM)', 'Computer Engineering']}
                 </SelectField>
-                <LongTextField as="textarea" name="description" label="Description:" placeholder="Tell us more about you" />
+                <LongTextField id="edit-description" as="textarea" name="description" label="Description:" placeholder="Tell us more about you" />
                 <ErrorsField />
                 <Row className="d-flex justify-content-end">
                   <SubmitField value="Submit" />

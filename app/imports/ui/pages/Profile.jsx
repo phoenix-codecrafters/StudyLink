@@ -59,7 +59,7 @@ const Profile = () => {
                 <ErrorsField />
                 <Row className="d-flex justify-content-end">
                   <Link to="/editprofile">
-                    <SubmitField value="Edit" />
+                    <SubmitField id="edit-submit" value="Edit" />
                   </Link>
                 </Row>
               </Card.Body>
