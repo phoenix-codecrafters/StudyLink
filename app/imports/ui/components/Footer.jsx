@@ -5,7 +5,7 @@ import { Col, Container } from 'react-bootstrap';
 const Footer = () => (
   <footer className="mt-auto py-3 bg-light">
     <Container>
-      <Col className="text-center">
+      <Col className="text-center custom-heading">
         <a href="https://github.com/phoenix-codecrafters/StudyLink" className="custom-link">
           PhoenixCodeCrafters
         </a>

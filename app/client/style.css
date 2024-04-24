@@ -1,17 +1,14 @@
-/* Use Open Sans as the default sans serif font. */
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,700|Source+Code+Pro:300,400,500,700");
+@import url('https://fonts.googleapis.com/css2?family=Concert+One&display=swap');
+
+.custom-heading{
+  font-family: 'Concert One', sans-serif;
+}
 
 /* Set up some CSS variables to theme the application. */
 :root {
   --matr-navbar-bg: 210, 231, 214;
   --matr-navbar-bg-rgb: 210, 231, 214;
 }
-
-@font-face {
-  font-family: 'Eazy Chat'; /* Name of the font family */
-  src: url('app/public/fonts/Eazy-Chat.ttf') format('truetype');
-}
-
   /* Change bootstrap variable values.
    See https://getbootstrap.com/docs/5.2/customize/css-variables/
    */
@@ -19,7 +16,6 @@ body {
   --bs-light-rgb: var(--matr-navbar-bg-rgb);
   background-image: url("https://static.vecteezy.com/system/resources/previews/011/426/070/non_2x/aesthetic-white-and-green-background-with-space-for-text-modern-background-design-with-liquid-shape-white-background-with-green-liquid-shapes-free-vector.jpg");
   background-size: cover;
-  font-family: 'Eazy Chat', sans-serif;
 }
 
 /* Set the alert background on the signin and signup pages. */
@@ -39,6 +35,12 @@ body {
 }
 
 #white-box {
+  background-color: white;
+  padding: 10px;
+  border: 4px solid black;
+}
+
+#white-soft-box {
   background-color: white;
   border-radius: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
