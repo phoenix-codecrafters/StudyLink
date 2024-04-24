@@ -22,7 +22,7 @@ const NavBar = () => {
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto justify-content-start">
+          <Nav className="me-auto justify-content-start custom-heading">
             {Roles.userIsInRole(Meteor.userId(), 'admin') ? ([
               <Nav.Link id="admin-sensei-panel" as={NavLink} to="/admin" key="admin">Sensei Panel</Nav.Link>,
               <Nav.Link id="admin-grasshopper-panel" as={NavLink} to="/admin" key="admin">Grasshopper Panel</Nav.Link>,
@@ -36,7 +36,7 @@ const NavBar = () => {
               <Nav.Link id="rules-and-regulations" as={NavLink} to="/RulesAndRegulations" key="rulesandregulations">Rules and Regulations</Nav.Link>,
             ])}
           </Nav>
-          <Nav className="justify-content-end">
+          <Nav className="justify-content-end custom-heading">
             {currentUser === '' ? (
               <NavDropdown id="login-dropdown" title="Login">
                 <NavDropdown.Item id="login-dropdown-sign-in" as={NavLink} to="/signin">

@@ -6,7 +6,7 @@ import { Envelope } from 'react-bootstrap-icons';
 const Footer = () => (
   <footer className="mt-auto py-3 bg-light">
     <Container>
-      <div className="text-center">
+      <Col className="text-center custom-heading">
         <a href="https://github.com/phoenix-codecrafters/StudyLink" className="custom-link">
           PhoenixCodeCrafters
         </a>
