@@ -3,6 +3,8 @@
   "private": true,
   "dependencies": {
     "@babel/runtime": "^7.24.0",
+    "@fullcalendar/core": "^6.1.11",
+    "@fullcalendar/daygrid": "^6.1.11",
     "bootstrap": "^5.3.3",
     "classnames": "^2.5.1",
     "core-js": "^3.36.0",
