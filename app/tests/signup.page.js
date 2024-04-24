@@ -12,7 +12,7 @@ class SignupPage {
     this.imageInput = Selector('input[name="image"]');
     this.majorSelect = Selector('select[name="major"]');
     this.classStandingSelect = Selector('select[name="classStanding"]');
-    this.descriptionInput = Selector('input[name="description"]');
+    this.descriptionInput = Selector('textarea[name="description"]');
     this.registerButton = Selector('button').withText('Register');
   }
 
