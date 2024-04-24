@@ -66,7 +66,7 @@ test('Test that edit profile works', async (testController) => {
   await editProfilePage.isDisplayed(testController);
 });
 
-test.only('Test that signup works', async (testController) => {
+test('Test that signup works', async (testController) => {
   await navBar.gotoSignUpPage(testController);
   await signupPage.signupUser(testController, userInfo);
   await navBar.isLoggedIn(testController, userInfo.email);
