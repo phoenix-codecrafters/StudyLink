@@ -5,25 +5,13 @@
   },
 
   "defaultAccounts": [
-    { "email": "admin@foo.com", "password": "changeme",
-      "profile": {
-        "firstname": "adminname",
-        "lastname": "siradmin",
-        "image": "adminimage",
-        "classStanding": "Freshman",
-        "major": "adminmajor",
-        "description": "i am admin"
-      }, "role": "admin" },
-    { "email": "john@foo.com", "password": "changeme",
-      "profile": {
-        "firstname": "john",
-        "lastname": "foo",
-        "image": "johnimage",
-        "classStanding": "Freshman",
-        "major": "johnMajor",
-        "description": "I am John"
-      }
-    }
+    { "email": "admin@foo.com", "password": "changeme", "role": "admin" },
+    { "email": "john@foo.com", "password": "changeme"}
+  ],
+
+  "defaultProfiles": [
+    {"firstname": "admin", "lastname": "siradmin", "image": "https://upload.wikimedia.org/wikipedia/commons/2/2c/Default_pfp.svg", "classStanding": "Freshman", "major": "Information and Computer Sciences (ICS)", "description": "i am admin", "owner":  "admin@foo.com"},
+    {"firstname": "John", "lastname": "Foo", "image": "https://upload.wikimedia.org/wikipedia/commons/2/2c/Default_pfp.svg", "classStanding": "Sophomore", "major": "Information and Computer Sciences (ICS)", "description": "i am john", "owner":  "john@foo.com"}
   ],
 
   "defaultData": [

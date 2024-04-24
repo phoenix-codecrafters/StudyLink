@@ -20,6 +20,7 @@ import Profile from '../pages/Profile';
 import AboutUs from '../pages/AboutUs';
 import LeaderBoard from '../pages/LeaderBoard';
 import RulesAndRegulations from '../pages/RulesAndRegulations';
+import EditProfile from '../pages/EditProfile';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
@@ -42,6 +43,7 @@ const App = () => {
           <Route path="/RulesAndRegulations" element={<RulesAndRegulations />} />
           <Route path="/home" element={<ProtectedRoute><Landing /></ProtectedRoute>} />
           <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+          <Route path="/editprofile" element={<ProtectedRoute><EditProfile /></ProtectedRoute>} />
           <Route path="/leader" element={<ProtectedRoute><LeaderBoard /></ProtectedRoute>} />
           <Route path="/add" element={<ProtectedRoute><AddStuff /></ProtectedRoute>} />
           <Route path="/edit/:_id" element={<ProtectedRoute><EditStuff /></ProtectedRoute>} />
