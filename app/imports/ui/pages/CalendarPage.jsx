@@ -20,7 +20,7 @@ const CalendarPage = () => {
   // Function to format time from "HHMM" to "HH:MM:SS"
   const formatTime = (time) => {
     // Convert time to string if it isn't already
-    const timeString = time.toString();
+    const timeString = time.toString().padStart(4, '0');
     const hours = timeString.slice(0, 2);
     const minutes = timeString.slice(2, 4);
     return `${hours}:${minutes}:00`;
@@ -55,7 +55,7 @@ const CalendarPage = () => {
             headerToolbar={{
               left: 'prev, next today',
               center: 'title',
-              right: 'dayGridMonth, dayGridWeek, dayGridDay',
+              right: 'dayGridMonth,dayGridWeek,dayGridDay',
             }}
             events={formattedEvents}
           />
