@@ -70,3 +70,22 @@ body {
   height: 150px;
   width: 150px;
 }
+
+/* Calendar Component Style */
+.fc .fc-daygrid-day-number{
+  color: dimgrey;
+  text-decoration: none;
+}
+
+.fc .fc-col-header-cell-cushion {
+  color: dimgrey;
+  text-decoration: none;
+}
+
+.fc-theme-standard th {
+  color: honeydew;
+}
+
+.fc .fc-toolbar-title {
+  color: dimgrey;
+}

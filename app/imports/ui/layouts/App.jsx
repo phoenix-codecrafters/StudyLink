@@ -18,11 +18,12 @@ import NotAuthorized from '../pages/NotAuthorized';
 import LoadingSpinner from '../components/LoadingSpinner';
 import Profile from '../pages/Profile';
 import AboutUs from '../pages/AboutUs';
+import ListStudySessions from '../pages/ListStudySessions';
 import LeaderBoard from '../pages/LeaderBoard';
 import RulesAndRegulations from '../pages/RulesAndRegulations';
-import Calendar from '../pages/Calendar';
 import EditProfile from '../pages/EditProfile';
 import AddStudySession from '../pages/AddStudySession';
+import CalendarPage from '../pages/CalendarPage';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
@@ -47,10 +48,11 @@ const App = () => {
           <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
           <Route path="/editprofile" element={<ProtectedRoute><EditProfile /></ProtectedRoute>} />
           <Route path="/leader" element={<ProtectedRoute><LeaderBoard /></ProtectedRoute>} />
-          <Route path="/calendar" element={<ProtectedRoute><Calendar /></ProtectedRoute>} />
           <Route path="/addstudysession" element={<ProtectedRoute><AddStudySession /></ProtectedRoute>} />
+          <Route path="/calendar" element={<ProtectedRoute><CalendarPage/></ProtectedRoute>} />
           <Route path="/add" element={<ProtectedRoute><AddStuff /></ProtectedRoute>} />
           <Route path="/edit/:_id" element={<ProtectedRoute><EditStuff /></ProtectedRoute>} />
+          <Route path="/sessions" element={<ProtectedRoute><ListStudySessions /></ProtectedRoute>} />
           <Route path="/admin" element={<AdminProtectedRoute ready={ready}><ListStuffAdmin /></AdminProtectedRoute>} />
           <Route path="/notauthorized" element={<NotAuthorized />} />
           <Route path="*" element={<NotFound />} />
