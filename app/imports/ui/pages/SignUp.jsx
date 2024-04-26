@@ -88,7 +88,7 @@ const SignUp = ({ location }) => {
               </Card.Body>
             </Card>
           </AutoForm>
-          <Alert variant="light">
+          <Alert id="white-box-logsign" variant="light">
             Already have an account? Login <Link to="/signin">here</Link>
           </Alert>
           {error === '' ? (

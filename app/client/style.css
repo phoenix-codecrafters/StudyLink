@@ -40,6 +40,12 @@ body {
   border: 4px solid black;
 }
 
+#white-box-logsign {
+  background-color: whitesmoke;
+  padding: 10px;
+  border: 1px solid lightgray;
+}
+
 #white-soft-box {
   background-color: white;
   border-radius: 20px;
