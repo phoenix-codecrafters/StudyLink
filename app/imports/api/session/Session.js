@@ -17,7 +17,7 @@ class SessionsCollection {
       year: Number,
       startTime: Number,
       endTime: Number,
-      class: String,
+      className: String,
       description: String,
       ghAttend: {
         type: Array,
