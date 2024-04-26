@@ -33,6 +33,7 @@ if (Profiles.collection.find().count() === 0) {
 
 const addSession = (session) => {
   console.log(` Adding: ${session.class} (${session.owner})`);
+  Sessions.collection.insert(session);
 };
 
 if (Sessions.collection.find().count() === 0) {
