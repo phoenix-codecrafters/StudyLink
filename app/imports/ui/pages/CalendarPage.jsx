@@ -6,22 +6,44 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { Sessions } from '../../api/session/Session';
 
-const Calendar = () => {
+const CalendarPage = () => {
   const { events, ready } = useTracker(() => {
     const subscription = Meteor.subscribe(Sessions.userPublicationName);
     const rdy = subscription.ready();
-    const event = Sessions.collection.find().fetch();
+    const eventsData = Sessions.collection.find().fetch();
     return {
-      events: event,
+      events: eventsData,
       ready: rdy,
     };
   });
 
-  const formattedEvents = events.map(event => ({
-    title: event.class,
-    start: event.start,
-    end: event.end,
-  }));
+  // Function to format time from "HHMM" to "HH:MM:SS"
+  const formatTime = (time) => {
+    // Convert time to string if it isn't already
+    const timeString = time.toString();
+    const hours = timeString.slice(0, 2);
+    const minutes = timeString.slice(2, 4);
+    return `${hours}:${minutes}:00`;
+  };
+
+  // Format events for FullCalendar
+  const formattedEvents = events.map(event => {
+    // Convert day, month, and year properties to strings
+    const day = String(event.day).padStart(2, '0');
+    const month = String(event.month).padStart(2, '0');
+    const year = String(event.year);
+
+    // Create ISO8601 date-time strings for start and end
+    const start = `${year}-${month}-${day}T${formatTime(event.startTime)}`;
+    const end = `${year}-${month}-${day}T${formatTime(event.endTime)}`;
+
+    // Return the formatted event object
+    return {
+      title: event.class,
+      start,
+      end,
+    };
+  });
 
   return (
     <div>
@@ -31,9 +53,9 @@ const Calendar = () => {
             plugins={[dayGridPlugin]}
             initialView="dayGridMonth"
             headerToolbar={{
-              left: 'prev,next today',
+              left: 'prev, next today',
               center: 'title',
-              right: 'dayGridMonth,dayGridWeek,dayGridDay',
+              right: 'dayGridMonth, dayGridWeek, dayGridDay',
             }}
             events={formattedEvents}
           />
@@ -42,8 +64,7 @@ const Calendar = () => {
         )}
       </div>
     </div>
-
   );
 };
 
-export default Calendar;
+export default CalendarPage;
