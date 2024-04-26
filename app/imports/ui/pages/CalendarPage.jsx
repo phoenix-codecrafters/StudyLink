@@ -39,7 +39,7 @@ const CalendarPage = () => {
 
     // Return the formatted event object
     return {
-      title: event.class,
+      title: event.className,
       start,
       end,
     };
