@@ -18,6 +18,7 @@ import NotAuthorized from '../pages/NotAuthorized';
 import LoadingSpinner from '../components/LoadingSpinner';
 import Profile from '../pages/Profile';
 import AboutUs from '../pages/AboutUs';
+import ListStudySessions from '../pages/ListStudySessions';
 import LeaderBoard from '../pages/LeaderBoard';
 import RulesAndRegulations from '../pages/RulesAndRegulations';
 import Calendar from '../pages/Calendar';
@@ -49,6 +50,7 @@ const App = () => {
           <Route path="/calendar" element={<ProtectedRoute><Calendar /></ProtectedRoute>} />
           <Route path="/add" element={<ProtectedRoute><AddStuff /></ProtectedRoute>} />
           <Route path="/edit/:_id" element={<ProtectedRoute><EditStuff /></ProtectedRoute>} />
+          <Route path="/sessions" element={<ProtectedRoute><ListStudySessions /></ProtectedRoute>} />
           <Route path="/admin" element={<AdminProtectedRoute ready={ready}><ListStuffAdmin /></AdminProtectedRoute>} />
           <Route path="/notauthorized" element={<NotAuthorized />} />
           <Route path="*" element={<NotFound />} />
