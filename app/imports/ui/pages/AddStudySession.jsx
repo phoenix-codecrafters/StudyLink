@@ -89,7 +89,7 @@ const AddStudySession = () => {
                 <LongTextField name="description" placeholder="Anything else you would like to specify." />
                 <HiddenField name="ghAttend" value="" />
                 <HiddenField name="ssAttend" value="" />
-                <HiddenField name="owner" value="username" />
+                <HiddenField name="owner" value="{Meteor.user().username" />
                 <SubmitField value="Submit" />
                 <ErrorsField />
               </Card.Body>

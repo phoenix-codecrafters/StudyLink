@@ -24,6 +24,7 @@ import RulesAndRegulations from '../pages/RulesAndRegulations';
 import EditProfile from '../pages/EditProfile';
 import AddStudySession from '../pages/AddStudySession';
 import CalendarPage from '../pages/CalendarPage';
+import EditStudySession from '../pages/EditStudySession';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
@@ -47,6 +48,7 @@ const App = () => {
           <Route path="/home" element={<ProtectedRoute><Landing /></ProtectedRoute>} />
           <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
           <Route path="/editprofile" element={<ProtectedRoute><EditProfile /></ProtectedRoute>} />
+          <Route path="/editstudysession" element={<ProtectedRoute><EditStudySession /></ProtectedRoute>} />
           <Route path="/leader" element={<ProtectedRoute><LeaderBoard /></ProtectedRoute>} />
           <Route path="/addstudysession" element={<ProtectedRoute><AddStudySession /></ProtectedRoute>} />
           <Route path="/liststudysessions" element={<ProtectedRoute><ListStudySessions /></ProtectedRoute>} />
