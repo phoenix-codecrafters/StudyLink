@@ -44,6 +44,7 @@ const CalendarPage = () => {
       start,
       end,
       description: event.description,
+      id: event._id,
     };
   });
 
