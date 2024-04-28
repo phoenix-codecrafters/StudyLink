@@ -43,6 +43,7 @@ const CalendarPage = () => {
       title: event.className,
       start,
       end,
+      description: event.description,
     };
   });
 
