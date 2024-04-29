@@ -78,11 +78,24 @@ const EventPopup = ({ event, onClose }) => {
         <Modal.Title>{event.title}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <p>Day: {day}</p>
-        <p>Start: {startTime}</p>
-        <p>End: {endTime}</p>
-        <p>Description: {description}</p>
-        {/* Add more event details here as needed */}
+        <p><strong>Day:</strong> {day}</p>
+        <p><strong>Start:</strong> {startTime}</p>
+        <p><strong>End:</strong> {endTime}</p>
+        <p><strong>Description:</strong> <br /> {description}</p>
+        <p><strong>Sensei Students:</strong> {doc.ssAttend.join(', ').split(',').map((attendee, index) => (
+          <React.Fragment key={index}>
+            <br />
+            {attendee.trim()}
+          </React.Fragment>
+        ))}
+        </p>
+        <p><strong>Grasshopper Students:</strong> {doc.ghAttend.join(', ').split(',').map((attendee, index) => (
+          <React.Fragment key={index}>
+            <br />
+            {attendee.trim()}
+          </React.Fragment>
+        ))}
+        </p>
       </Modal.Body>
       <Modal.Footer>
         <AutoForm schema={bridge} onSubmit={data => rsvp(data)}>
