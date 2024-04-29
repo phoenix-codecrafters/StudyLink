@@ -4,7 +4,7 @@ import { Col, Container, Row } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { Sessions } from '../../api/session/Session';
-import StudySession from '../components/StudySession'; // Assuming StudySession component is defined
+import StudySession from '../components/StudySession';
 
 const ListStudySessions = () => {
   // useTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
