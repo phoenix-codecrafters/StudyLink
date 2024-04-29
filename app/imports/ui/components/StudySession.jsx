@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Card, Row, Col, ListGroup } from 'react-bootstrap';
+import swal from 'sweetalert';
+import { Card, Row, Col, ListGroup, Button } from 'react-bootstrap';
 import { Envelope, Calendar3, Clock } from 'react-bootstrap-icons';
 import { Link } from 'react-router-dom';
+import { Sessions } from '../../api/session/Session';
 
 /** Renders a single row in the List Stuff table. */
 const StudySession = ({ studySession }) => {
@@ -19,6 +21,19 @@ const StudySession = ({ studySession }) => {
   const dateString = startDate.toLocaleDateString('en-US'); // "MM/DD/YYYY"
   const startTime = startDate.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true }); // "HH:MM AM/PM"
   const endTime = endDate.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true }); // "HH:MM AM/PM"
+
+  const handleRemove = () => {
+    swal('Are you sure you want to delete this session?', {
+      dangerMode: true,
+      buttons: true,
+    }).then((confirmDelete) => {
+      if (confirmDelete) {
+        Sessions.collection.remove(studySession._id, (error) => (error ?
+          swal('Error', error.message, 'error') :
+          swal('Success', 'Session removed successfully', 'success')));
+      }
+    });
+  };
 
   return (
     <Card className="h-100" border="success">
@@ -51,10 +66,15 @@ const StudySession = ({ studySession }) => {
           </ListGroup.Item>
         </ListGroup>
         <Row className="mt-3">
-          <Col className="d-flex justify-content-end">
-            <Link to={`/edit-session/${studySession._id}`} className="btn btn-primary">
+          <Col className="d-flex justify-content-start">
+            <Link to={`/editstudysession/${studySession._id}`} className="btn btn-primary">
               Edit
             </Link>
+          </Col>
+          <Col className="d-flex justify-content-end">
+            <Button variant="danger" onClick={handleRemove}>
+              Delete
+            </Button>
           </Col>
         </Row>
       </Card.Body>

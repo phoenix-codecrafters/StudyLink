@@ -19,6 +19,7 @@ import LoadingSpinner from '../components/LoadingSpinner';
 import Profile from '../pages/Profile';
 import AboutUs from '../pages/AboutUs';
 import MyStudySessions from '../pages/MyStudySessions';
+import EditStudySession from '../pages/EditStudySession';
 import LeaderBoard from '../pages/LeaderBoard';
 import RulesAndRegulations from '../pages/RulesAndRegulations';
 import EditProfile from '../pages/EditProfile';
@@ -50,6 +51,7 @@ const App = () => {
           <Route path="/leader" element={<ProtectedRoute><LeaderBoard /></ProtectedRoute>} />
           <Route path="/addstudysession" element={<ProtectedRoute><AddStudySession /></ProtectedRoute>} />
           <Route path="/mystudysessions" element={<ProtectedRoute><MyStudySessions /></ProtectedRoute>} />
+          <Route path="/editstudysession/:_id" element={<ProtectedRoute><EditStudySession /></ProtectedRoute>} />
           <Route path="/calendar" element={<ProtectedRoute><CalendarPage /></ProtectedRoute>} />
           <Route path="/add" element={<ProtectedRoute><AddStuff /></ProtectedRoute>} />
           <Route path="/edit/:_id" element={<ProtectedRoute><EditStuff /></ProtectedRoute>} />
