@@ -61,7 +61,13 @@ const EventPopup = ({ event, onClose }) => {
         <p><strong>Start:</strong> {startTime}</p>
         <p><strong>End:</strong> {endTime}</p>
         <p><strong>Description:</strong> <br /> {description}</p>
-        <p><strong>Sensei Students:</strong> </p>
+        <p><strong>Sensei Students:</strong> {doc.ssAttend.join(', ').split(',').map((attendee, index) => (
+          <React.Fragment key={index}>
+            <br />
+            {attendee.trim()}
+          </React.Fragment>
+        ))}
+        </p>
         <p><strong>Grasshopper Students:</strong> {doc.ghAttend.join(', ').split(',').map((attendee, index) => (
           <React.Fragment key={index}>
             <br />
