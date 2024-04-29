@@ -46,6 +46,13 @@ const StudySession = ({ studySession }) => {
         <Row>
           <Col>
             <p className="text-muted">
+              Created by: {studySession.owner}
+            </p>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <p className="text-muted">
               <Calendar3 /> Date: {dateString}
             </p>
           </Col>

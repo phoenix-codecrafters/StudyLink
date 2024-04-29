@@ -17,7 +17,7 @@ const LeaderBoard = () => {
     // Determine if the subscription is ready
     const rdy = subscription.ready();
     // Get the score documents
-    const scoreItems = Profiles.collection.find({}).fetch();
+    const scoreItems = Profiles.collection.find().fetch();
     return {
       scores: scoreItems,
       ready: rdy,
@@ -44,9 +44,10 @@ const LeaderBoard = () => {
                 .slice() // Create a shallow copy of the array to avoid mutating the original array
                 .sort((a, b) => b.score - a.score) // Sort the array based on the score property
                 .map((score, index) => (
-                  <PersonItem key={score.score} score={score} rank={index + 1} />
+                  <PersonItem key={`${score._id}_${index}`} score={score} rank={index + 1} />
                 ))}
             </tbody>
+
           </Table>
         </Col>
       </Row>

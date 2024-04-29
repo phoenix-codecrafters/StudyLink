@@ -24,14 +24,13 @@ const NavBar = () => {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto justify-content-start custom-heading">
             {Roles.userIsInRole(Meteor.userId(), 'admin') ? ([
-              <Nav.Link id="admin-sensei-panel" as={NavLink} to="/admin" key="admin">Sensei Panel</Nav.Link>,
-              <Nav.Link id="admin-grasshopper-panel" as={NavLink} to="/admin" key="admin">Grasshopper Panel</Nav.Link>,
+              <Nav.Link id="adminlistsessions" as={NavLink} to="/adminlistsessions" key="admin">Admin Session Panel</Nav.Link>,
             ]) : ''}
             {currentUser ? ([
-              <Nav.Link id="calendar" as={NavLink} to="/calendar" key="calendar">My Calendar</Nav.Link>,
+              <Nav.Link id="calendar" as={NavLink} to="/calendar" key="calendar">Calendar</Nav.Link>,
               <Nav.Link id="addstudysession" as={NavLink} to="/addstudysession" key="addstudysession">Add Study Session</Nav.Link>,
               <Nav.Link id="leaderboard" as={NavLink} to="/leader" key="list">Leaderboard</Nav.Link>,
-              <Nav.Link id="sessions" as={NavLink} to="/sessions" key="list sessions">Study Sessions</Nav.Link>,
+              <Nav.Link id="sessions" as={NavLink} to="/mystudysessions" key="list sessions">Owned Study Sessions</Nav.Link>,
             ]) : ([
               <Nav.Link id="about-us-nav" as={NavLink} to="/about-us" key="about-us">About Us</Nav.Link>,
               <Nav.Link id="rules-and-regulations" as={NavLink} to="/RulesAndRegulations" key="rulesandregulations">Rules and Regulations</Nav.Link>,

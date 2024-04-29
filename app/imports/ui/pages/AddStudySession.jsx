@@ -62,7 +62,7 @@ const AddStudySession = () => {
       ghAttend = [owner];
       ssAttend = [''];
     } else {
-      ssAttend = [{ owner }];
+      ssAttend = [owner];
       ghAttend = [''];
     }
     Sessions.collection.insert(

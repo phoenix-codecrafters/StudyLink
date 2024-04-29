@@ -24,8 +24,8 @@ class ProfilesCollection {
         allowedValues: ['Information and Computer Sciences (ICS)', 'Information Technology Management (ITM)', 'Computer Engineering'],
       },
       description: String,
-      owner: String,
       score: Number,
+      owner: String,
     });
     // Attach the schema to the collection, so all attempts to insert a document are checked against schema.
     this.collection.attachSchema(this.schema);
