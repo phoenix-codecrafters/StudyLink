@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Meteor } from 'meteor/meteor';
 import { useTracker } from 'meteor/react-meteor-data';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import LoadingSpinner from '../components/LoadingSpinner';
+import EventPopup from '../components/EventPopup'; // Assuming correct path
 import { Sessions } from '../../api/session/Session';
 
 const CalendarPage = () => {
@@ -42,23 +43,44 @@ const CalendarPage = () => {
       title: event.className,
       start,
       end,
+      description: event.description,
+      id: event._id,
     };
   });
+
+  const [showEventPopup, setShowEventPopup] = useState(false);
+  const [selectedEvent, setSelectedEvent] = useState(null);
+
+  const handleEventClick = (info) => {
+    setSelectedEvent(info.event);
+    setShowEventPopup(true);
+  };
+
+  const handleClosePopup = () => {
+    setSelectedEvent(null);
+    setShowEventPopup(false);
+  };
 
   return (
     <div>
       <div className="calendar-container" id="white-box" style={{ margin: 'auto', width: '97%', marginTop: '20px', marginBottom: '20px' }}>
         {ready ? (
-          <FullCalendar
-            plugins={[dayGridPlugin]}
-            initialView="dayGridMonth"
-            headerToolbar={{
-              left: 'prev, next today',
-              center: 'title',
-              right: 'dayGridMonth,dayGridWeek,dayGridDay',
-            }}
-            events={formattedEvents}
-          />
+          <>
+            <FullCalendar
+              plugins={[dayGridPlugin]}
+              initialView="dayGridMonth"
+              headerToolbar={{
+                left: 'prev, next today',
+                center: 'title',
+                right: 'dayGridMonth,dayGridWeek,dayGridDay',
+              }}
+              events={formattedEvents}
+              eventClick={handleEventClick}
+            />
+            {showEventPopup && selectedEvent && (
+              <EventPopup event={selectedEvent} onClose={handleClosePopup} />
+            )}
+          </>
         ) : (
           <LoadingSpinner />
         )}
