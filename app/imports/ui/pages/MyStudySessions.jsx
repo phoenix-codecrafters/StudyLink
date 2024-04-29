@@ -6,7 +6,7 @@ import LoadingSpinner from '../components/LoadingSpinner';
 import { Sessions } from '../../api/session/Session';
 import StudySession from '../components/StudySession';
 
-const ListStudySessions = () => {
+const MyStudySessions = () => {
   const user = Meteor.user();
   // useTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
   const { ready, sessions } = useTracker(() => {
@@ -53,4 +53,4 @@ const ListStudySessions = () => {
     ) : <LoadingSpinner />);
 };
 
-export default ListStudySessions;
+export default MyStudySessions;

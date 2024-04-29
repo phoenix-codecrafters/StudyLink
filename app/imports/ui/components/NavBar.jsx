@@ -31,7 +31,7 @@ const NavBar = () => {
               <Nav.Link id="calendar" as={NavLink} to="/calendar" key="calendar">My Calendar</Nav.Link>,
               <Nav.Link id="addstudysession" as={NavLink} to="/addstudysession" key="addstudysession">Add Study Session</Nav.Link>,
               <Nav.Link id="leaderboard" as={NavLink} to="/leader" key="list">Leaderboard</Nav.Link>,
-              <Nav.Link id="sessions" as={NavLink} to="/sessions" key="list sessions">Study Sessions</Nav.Link>,
+              <Nav.Link id="sessions" as={NavLink} to="/mystudysessions" key="list sessions">Study Sessions</Nav.Link>,
             ]) : ([
               <Nav.Link id="about-us-nav" as={NavLink} to="/about-us" key="about-us">About Us</Nav.Link>,
               <Nav.Link id="rules-and-regulations" as={NavLink} to="/RulesAndRegulations" key="rulesandregulations">Rules and Regulations</Nav.Link>,
