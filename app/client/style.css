@@ -54,6 +54,14 @@ body {
   width: 350px;
   border: 4px solid honeydew;
 }
+
+#no-sessions-box {
+  background-color: white;
+  padding: 10px;
+  border: 4px solid black;
+  margin: auto;
+}
+
 .description-box {
   width: 300px;
   height: auto;
