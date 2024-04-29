@@ -3,7 +3,10 @@ import { Meteor } from 'meteor/meteor';
 import PropTypes from 'prop-types';
 import swal from 'sweetalert';
 import { useTracker } from 'meteor/react-meteor-data';
-import { Button, Modal } from 'react-bootstrap';
+import SimpleSchema from 'simpl-schema';
+import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
+import { Modal } from 'react-bootstrap';
+import { AutoForm, RadioField, SubmitField } from 'uniforms-bootstrap5';
 import { Sessions } from '../../api/session/Session';
 import LoadingSpinner from './LoadingSpinner';
 
@@ -17,6 +20,12 @@ const EventPopup = ({ event, onClose }) => {
   const day = startDate.slice(0, 10);
   const startTime = startDate.slice(16, 24);
   const endTime = endDate.slice(16, 24);
+
+  const rsvpSchema = new SimpleSchema({
+    ssOgh: Number,
+  });
+
+  const bridge = new SimpleSchema2Bridge(rsvpSchema);
 
   const user = Meteor.user();
 
@@ -33,7 +42,8 @@ const EventPopup = ({ event, onClose }) => {
     };
   });
 
-  const rsvp = () => {
+  const rsvp = (data) => {
+    const { ssOgh } = data;
     const username = user.username;
     let inAttend = false;
     doc.ghAttend.forEach(attendee => {
@@ -41,14 +51,25 @@ const EventPopup = ({ event, onClose }) => {
         inAttend = true;
       }
     });
-    if (inAttend) {
-      swal('You are already attending this session!');
-    } else {
+    doc.ssAttend.forEach(attendee => {
+      if (attendee === username) {
+        inAttend = true;
+      }
+    });
+    if (!inAttend && ssOgh === 0) {
       const ghAttend = [...doc.ghAttend, username];
       Sessions.collection.update(doc._id, { $set: { ghAttend } }, (error) => (error ?
         swal('Error', error.message, 'error') :
         swal('Success', 'You have RSVP\'d to this session', 'success')));
+    } else if (!inAttend && ssOgh === 1) {
+      const ssAttend = [...doc.ssAttend, username];
+      Sessions.collection.update(doc._id, { $set: { ssAttend } }, (error) => (error ?
+        swal('Error', error.message, 'error') :
+        swal('Success', 'You have RSVP\'d to this session', 'success')));
+    } else {
+      swal('You are already attending this session!');
     }
+
   };
 
   return ready ? (
@@ -77,7 +98,26 @@ const EventPopup = ({ event, onClose }) => {
         </p>
       </Modal.Body>
       <Modal.Footer>
-        <Button style={{ backgroundColor: 'rgb(124, 209, 249)', borderColor: 'rgb(124, 209, 249)' }} onClick={rsvp}>RSVP</Button>
+        <AutoForm schema={bridge} onSubmit={data => rsvp(data)}>
+          <div className="d-flex">
+            <div className="form-check-label pr-3" style={{ marginTop: '1rem', paddingRight: '1rem' }}>Choose: </div>
+            <div>
+              <RadioField
+                style={{ marginTop: '1rem' }}
+                name="ssOgh"
+                label=""
+                inline
+                options={[
+                  { label: 'Grasshopper', value: 0 },
+                  { label: 'Sensei', value: 1 },
+                ]}
+              />
+            </div>
+            <div className="d-flex align-items-center">
+              <SubmitField inputClassName="swal-button swal-button--confirm" name="Submit">RSVP</SubmitField>
+            </div>
+          </div>
+        </AutoForm>
       </Modal.Footer>
     </Modal>
   ) : <LoadingSpinner />;
