@@ -9,7 +9,7 @@ import LoadingSpinner from '../components/LoadingSpinner';
 /* Renders a table containing all the score documents. Use <PersonItem> to render each row. */
 const LeaderBoard = () => {
   // useTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
-  const { ready, scores } = useTracker(() => {
+  const { ready, profiles } = useTracker(() => {
     // Note that this subscription will get cleaned up
     // when your component is unmounted or deps change.
     // Get access to score documents.
@@ -17,9 +17,9 @@ const LeaderBoard = () => {
     // Determine if the subscription is ready
     const rdy = subscription.ready();
     // Get the score documents
-    const scoreItems = Profiles.collection.find().fetch();
+    const profileItems = Profiles.collection.find().fetch();
     return {
-      scores: scoreItems,
+      profiles: profileItems,
       ready: rdy,
     };
   }, []);
@@ -40,11 +40,11 @@ const LeaderBoard = () => {
               </tr>
             </thead>
             <tbody>
-              {scores
+              {profiles
                 .slice() // Create a shallow copy of the array to avoid mutating the original array
                 .sort((a, b) => b.score - a.score) // Sort the array based on the score property
                 .map((score, index) => (
-                  <PersonItem key={`${score._id}_${index}`} score={score} rank={index + 1} />
+                  <PersonItem key={`${score._id}_${index}`} profile={score} rank={index + 1} />
                 ))}
             </tbody>
 

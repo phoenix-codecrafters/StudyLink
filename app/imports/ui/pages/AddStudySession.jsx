@@ -96,7 +96,7 @@ const AddStudySession = () => {
                 <TextField name="className" placeholder="ex. ICS 314" />
                 <RadioField
                   name="ssOgh"
-                  label="Learning or Helping"
+                  label="Choose:"
                   options={[
                     { label: 'Grasshopper', value: 0 },
                     { label: 'Sensei', value: 1 },

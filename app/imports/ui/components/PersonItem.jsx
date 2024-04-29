@@ -2,18 +2,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 /** Renders a single row in the List Score table. See pages/ListScore.jsx. */
-const PersonItem = ({ score, rank }) => (
+const PersonItem = ({ profile, rank }) => (
   <tr>
     <td>{rank}</td>
-    <td>{score.firstname} {score.lastname}</td>
-    <td>{score.score}</td>
-    <td>{score.major}</td>
+    <td>{profile.firstname}, {profile.lastname}</td>
+    <td>{profile.score}</td>
+    <td>{profile.major}</td>
   </tr>
 );
 
 // Require a document to be passed to this component.
 PersonItem.propTypes = {
-  score: PropTypes.shape({
+  profile: PropTypes.shape({
     firstname: PropTypes.string,
     lastname: PropTypes.string,
     score: PropTypes.number,
