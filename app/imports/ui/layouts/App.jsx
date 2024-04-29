@@ -25,6 +25,7 @@ import RulesAndRegulations from '../pages/RulesAndRegulations';
 import EditProfile from '../pages/EditProfile';
 import AddStudySession from '../pages/AddStudySession';
 import CalendarPage from '../pages/CalendarPage';
+import AdminListStudySessions from '../pages/AdminListStudySessions';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
@@ -56,6 +57,7 @@ const App = () => {
           <Route path="/add" element={<ProtectedRoute><AddStuff /></ProtectedRoute>} />
           <Route path="/edit/:_id" element={<ProtectedRoute><EditStuff /></ProtectedRoute>} />
           <Route path="/admin" element={<AdminProtectedRoute ready={ready}><ListStuffAdmin /></AdminProtectedRoute>} />
+          <Route path="/adminlistsessions" element={<AdminProtectedRoute ready={ready}><AdminListStudySessions /></AdminProtectedRoute>} />
           <Route path="/notauthorized" element={<NotAuthorized />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

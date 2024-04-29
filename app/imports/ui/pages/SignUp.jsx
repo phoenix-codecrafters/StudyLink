@@ -45,7 +45,8 @@ const SignUp = ({ location }) => {
       }
     });
     const owner = email;
-    Profiles.collection.insert({ firstname, lastname, image, classStanding, major, description, owner });
+    const score = 0;
+    Profiles.collection.insert({ firstname, lastname, image, classStanding, major, description, score, owner });
   };
 
   /* Display the signup form. Redirect to add page after successful registration and login. */
