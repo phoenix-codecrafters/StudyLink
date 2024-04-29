@@ -132,7 +132,6 @@ EventPopup.propTypes = {
     _def: PropTypes.shape({
       extendedProps: PropTypes.shape({
         description: PropTypes.string.isRequired,
-        // Add more specific PropTypes for other properties if necessary
       }).isRequired,
     }).isRequired,
   }).isRequired,
