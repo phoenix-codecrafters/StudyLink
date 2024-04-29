@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, Col, Container, Row } from 'react-bootstrap';
-import { AutoForm, ErrorsField, HiddenField, LongTextField, SelectField, SubmitField, TextField } from 'uniforms-bootstrap5';
+import { AutoForm, ErrorsField, HiddenField, LongTextField, RadioField, SelectField, SubmitField, TextField } from 'uniforms-bootstrap5';
 import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
@@ -55,8 +55,16 @@ const AddStudySession = () => {
 
   // On submit, insert the data.
   const submit = (data, formRef) => {
-    const { day, month, year, startTime, endTime, className, description, ghAttend, ssAttend } = data;
+    const { day, month, year, startTime, endTime, className, ssOgh, description } = data;
+    let { ssAttend, ghAttend } = data;
     const owner = Meteor.user().username;
+    if (ssOgh === 0) {
+      ghAttend = [owner];
+      ssAttend = [''];
+    } else {
+      ssAttend = [{ owner }];
+      ghAttend = [''];
+    }
     Sessions.collection.insert(
       { day, month, year, startTime, endTime, className, description, ghAttend, ssAttend, owner },
       (error) => {
@@ -86,6 +94,14 @@ const AddStudySession = () => {
                 <SelectField name="startTime" options={generateTimeOptions()} placeholder="Choose..." />
                 <SelectField name="endTime" options={generateTimeOptions()} placeholder="Choose..." />
                 <TextField name="className" placeholder="ex. ICS 314" />
+                <RadioField
+                  name="ssOgh"
+                  label="Learning or Helping"
+                  options={[
+                    { label: 'Grasshopper', value: 0 },
+                    { label: 'Sensei', value: 1 },
+                  ]}
+                />
                 <LongTextField name="description" placeholder="Anything else you would like to specify." />
                 <HiddenField name="ghAttend" value="" />
                 <HiddenField name="ssAttend" value="" />
