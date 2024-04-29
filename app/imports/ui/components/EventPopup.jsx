@@ -1,6 +1,6 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Meteor } from 'meteor/meteor';
+import PropTypes from 'prop-types';
 import swal from 'sweetalert';
 import { useTracker } from 'meteor/react-meteor-data';
 import { Button, Modal } from 'react-bootstrap';
@@ -9,7 +9,6 @@ import LoadingSpinner from './LoadingSpinner';
 
 const EventPopup = ({ event, onClose }) => {
   // Convert the Date objects to string representations
-
   const startDate = event.start instanceof Date ? event.start.toString() : event.start;
   const endDate = event.end instanceof Date ? event.end.toString() : event.end;
   const description = event._def.extendedProps.description;
@@ -28,8 +27,6 @@ const EventPopup = ({ event, onClose }) => {
     const rdy = subscription.ready();
     // Get the document
     const document = Sessions.collection.find({ _id: event.id }).fetch();
-    console.log(document);
-
     return {
       doc: document[0],
       ready: rdy,
@@ -47,7 +44,7 @@ const EventPopup = ({ event, onClose }) => {
     if (inAttend) {
       swal('You are already attending this session!');
     } else {
-      const ghAttend = [...doc.ghAttend, username]; // Use default empty array if ghAttend is undefined
+      const ghAttend = [...doc.ghAttend, username];
       Sessions.collection.update(doc._id, { $set: { ghAttend } }, (error) => (error ?
         swal('Error', error.message, 'error') :
         swal('Success', 'You have RSVP\'d to this session', 'success')));
@@ -65,14 +62,13 @@ const EventPopup = ({ event, onClose }) => {
         <p>End: {endTime}</p>
         <p>Description: {description}</p>
         <p>Sensei Students: </p>
-        <p>Grasshopper Students: {console.log(doc)} </p>
+        <p>Grasshopper Students: {} </p>
       </Modal.Body>
       <Modal.Footer>
         <Button style={{ backgroundColor: 'rgb(124, 209, 249)', borderColor: 'rgb(124, 209, 249)' }} onClick={rsvp}>RSVP</Button>
       </Modal.Footer>
     </Modal>
   ) : <LoadingSpinner />;
-
 };
 
 EventPopup.propTypes = {
