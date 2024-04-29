@@ -62,7 +62,7 @@ const EventPopup = ({ event, onClose }) => {
         <p>End: {endTime}</p>
         <p>Description: {description}</p>
         <p>Sensei Students: </p>
-        <p>Grasshopper Students: {} </p>
+        <p>Grasshopper Students: {doc.ghAttend.join(', ')} </p>
       </Modal.Body>
       <Modal.Footer>
         <Button style={{ backgroundColor: 'rgb(124, 209, 249)', borderColor: 'rgb(124, 209, 249)' }} onClick={rsvp}>RSVP</Button>
