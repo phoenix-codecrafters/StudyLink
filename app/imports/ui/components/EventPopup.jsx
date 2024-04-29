@@ -57,12 +57,18 @@ const EventPopup = ({ event, onClose }) => {
         <Modal.Title>{event.title}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <p>Day: {day}</p>
-        <p>Start: {startTime}</p>
-        <p>End: {endTime}</p>
-        <p>Description: {description}</p>
-        <p>Sensei Students: </p>
-        <p>Grasshopper Students: {doc.ghAttend.join(', ')} </p>
+        <p><strong>Day:</strong> {day}</p>
+        <p><strong>Start:</strong> {startTime}</p>
+        <p><strong>End:</strong> {endTime}</p>
+        <p><strong>Description:</strong> <br /> {description}</p>
+        <p><strong>Sensei Students:</strong> </p>
+        <p><strong>Grasshopper Students:</strong> {doc.ghAttend.join(', ').split(',').map((attendee, index) => (
+          <React.Fragment key={index}>
+            <br />
+            {attendee.trim()}
+          </React.Fragment>
+        ))}
+        </p>
       </Modal.Body>
       <Modal.Footer>
         <Button style={{ backgroundColor: 'rgb(124, 209, 249)', borderColor: 'rgb(124, 209, 249)' }} onClick={rsvp}>RSVP</Button>
