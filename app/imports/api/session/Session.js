@@ -19,6 +19,10 @@ class SessionsCollection {
       endTime: Number,
       className: String,
       description: String,
+      ssOgh: {
+        type: Number,
+        optional: true,
+      },
       ghAttend: {
         type: Array,
       },
