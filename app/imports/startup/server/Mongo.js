@@ -1,5 +1,5 @@
 import { Meteor } from 'meteor/meteor';
-import { Stuffs } from '../../api/stuff/Stuff.js';
+import { Scores } from '../../api/score/Score';
 import { Profiles } from '../../api/profile/Profile';
 import { Sessions } from '../../api/session/Session';
 
@@ -8,14 +8,14 @@ import { Sessions } from '../../api/session/Session';
 // Initialize the database with a default data document.
 const addData = (data) => {
   console.log(`  Adding: ${data.name} (${data.owner})`);
-  Stuffs.collection.insert(data);
+  Scores.collection.insert(data);
 };
 
-// Initialize the StuffsCollection if empty.
-if (Stuffs.collection.find().count() === 0) {
-  if (Meteor.settings.defaultData) {
+// Initialize the ScoresCollection if empty.
+if (Scores.collection.find().count() === 0) {
+  if (Meteor.settings.defaultScores) {
     console.log('Creating default data.');
-    Meteor.settings.defaultData.forEach(data => addData(data));
+    Meteor.settings.defaultScores.forEach(data => addData(data));
   }
 }
 

@@ -10,8 +10,10 @@
   ],
 
   "defaultProfiles": [
-    {"firstname": "admin", "lastname": "siradmin", "image": "https://upload.wikimedia.org/wikipedia/commons/2/2c/Default_pfp.svg", "classStanding": "Freshman", "major": "Information and Computer Sciences (ICS)", "description": "i am admin", "owner":  "admin@foo.com"},
-    {"firstname": "John", "lastname": "Foo", "image": "https://upload.wikimedia.org/wikipedia/commons/2/2c/Default_pfp.svg", "classStanding": "Sophomore", "major": "Information and Computer Sciences (ICS)", "description": "i am john", "owner":  "john@foo.com"}
+    {"firstname": "admin", "lastname": "siradmin", "image": "https://upload.wikimedia.org/wikipedia/commons/2/2c/Default_pfp.svg", "classStanding": "Freshman", "major": "Information and Computer Sciences (ICS)", "description": "i am admin", "owner":  "admin@foo.com", "score": "45"},
+    {"firstname": "John", "lastname": "Foo", "image": "https://upload.wikimedia.org/wikipedia/commons/2/2c/Default_pfp.svg", "classStanding": "Sophomore", "major": "Information and Computer Sciences (ICS)", "description": "i am john", "owner":  "john@foo.com", "score": "45" },
+    {"firstname": "Jane", "lastname": "Doe", "image": "https://upload.wikimedia.org/wikipedia/commons/2/2c/Default_pfp.svg", "classStanding": "Sophomore", "major": "Information and Computer Sciences (ICS)", "description": "i am john", "owner":  "john@foo.com", "score": "55" }
+
   ],
 
   "defaultSessions": [
@@ -19,8 +21,8 @@
     {"day":  "30", "month":  "04", "year":  "2024", "startTime":  "1600", "endTime":  "2000", "className":  "ICS 314", "description": "I need help with algorithms", "ghAttend": [ "john@foo.com", "test@foo.com" ], "ssAttend": [ "admin@foo.com" ], "owner": "john@foo.com"}
   ],
 
-  "defaultData": [
-    { "name": "Jane Doe", "rank": 1, "owner": "john@foo.com", "attendance": "5", "score": "45" },
-    { "name": "John Doe", "rank": 2, "owner": "john@foo.com", "attendance": "2", "score": "30" }
+  "defaultScores": [
+    { "name": "Jane Doe", "owner": "john@foo.com", "attendance": "5", "score": "30" },
+    { "name": "John Doe", "owner": "john@foo.com", "attendance": "2", "score": "45" }
   ]
 }

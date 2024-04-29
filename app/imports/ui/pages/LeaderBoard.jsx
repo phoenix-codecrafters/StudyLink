@@ -2,24 +2,24 @@ import React from 'react';
 import { Meteor } from 'meteor/meteor';
 import { Col, Container, Row, Table } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
-import { Stuffs } from '../../api/stuff/Stuff';
-import StuffItem from '../components/StuffItem';
+import { Profiles } from '../../api/profile/Profile';
+import PersonItem from '../components/PersonItem';
 import LoadingSpinner from '../components/LoadingSpinner';
 
-/* Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
+/* Renders a table containing all the score documents. Use <PersonItem> to render each row. */
 const LeaderBoard = () => {
   // useTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
-  const { ready, stuffs } = useTracker(() => {
+  const { ready, scores } = useTracker(() => {
     // Note that this subscription will get cleaned up
     // when your component is unmounted or deps change.
-    // Get access to Stuff documents.
-    const subscription = Meteor.subscribe(Stuffs.userPublicationName);
+    // Get access to score documents.
+    const subscription = Meteor.subscribe(Profiles.userPublicationName);
     // Determine if the subscription is ready
     const rdy = subscription.ready();
-    // Get the Stuff documents
-    const stuffItems = Stuffs.collection.find({}).fetch();
+    // Get the score documents
+    const scoreItems = Profiles.collection.find({}).fetch();
     return {
-      stuffs: stuffItems,
+      scores: scoreItems,
       ready: rdy,
     };
   }, []);
@@ -36,11 +36,16 @@ const LeaderBoard = () => {
                 <th>Rank</th>
                 <th>User</th>
                 <th>Score</th>
-                <th>Attendance</th>
+                <th>Major</th>
               </tr>
             </thead>
             <tbody>
-              {stuffs.map((stuff) => <StuffItem key={stuff._id} stuff={stuff} />)}
+              {scores
+                .slice() // Create a shallow copy of the array to avoid mutating the original array
+                .sort((a, b) => b.score - a.score) // Sort the array based on the score property
+                .map((score, index) => (
+                  <PersonItem key={score.score} score={score} rank={index + 1} />
+                ))}
             </tbody>
           </Table>
         </Col>
