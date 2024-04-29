@@ -21,7 +21,7 @@
     {"day":  "30", "month":  "04", "year":  "2024", "startTime":  "1600", "endTime":  "2000", "className":  "ICS 314", "description": "I need help with algorithms", "ghAttend": [ "john@foo.com", "test@foo.com" ], "ssAttend": [ "admin@foo.com" ], "owner": "john@foo.com"}
   ],
 
-  "defaultData": [
+  "defaultScores": [
     { "name": "Jane Doe", "owner": "john@foo.com", "attendance": "5", "score": "30" },
     { "name": "John Doe", "owner": "john@foo.com", "attendance": "2", "score": "45" }
   ]
