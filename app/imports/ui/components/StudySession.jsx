@@ -1,34 +1,67 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Card, Row, Col, ListGroup } from 'react-bootstrap';
-import { Envelope } from 'react-bootstrap-icons';
+import { Envelope, Calendar3, Clock } from 'react-bootstrap-icons';
+import { Link } from 'react-router-dom';
 
 /** Renders a single row in the List Stuff table. */
-const StudySession = ({ studySession }) => (
-  <Card className="h-100" border="success">
-    <Card.Header>
-      <Row>
-        <Col>
-          <br />
-          <Card.Title>{studySession.className}</Card.Title>
-          <Card.Subtitle className="text-muted">
-            <p className="mt-1">Time: {studySession.startTime.toLocaleString()} - {studySession.endTime.toLocaleString()}</p>
-          </Card.Subtitle>
-        </Col>
-      </Row>
-    </Card.Header>
-    <Card.Body>
-      <ListGroup className="list-group-flush">
-        <ListGroup.Item>{studySession.description}</ListGroup.Item>
-        <ListGroup.Item>
-          <Envelope /> {studySession.owner}
-        </ListGroup.Item>
-      </ListGroup>
-    </Card.Body>
-  </Card>
-);
+const StudySession = ({ studySession }) => {
+  // start time
+  const startHours = Math.floor(studySession.startTime / 100);
+  const startMinutes = studySession.startTime % 100;
+  // end time
+  const endHours = Math.floor(studySession.endTime / 100);
+  const endMinutes = studySession.endTime % 100;
 
-// Require a document to be passed to this component.
+  const startDate = new Date(studySession.year, studySession.month - 1, studySession.day, startHours, startMinutes);
+  const endDate = new Date(studySession.year, studySession.month - 1, studySession.day, endHours, endMinutes);
+
+  const dateString = startDate.toLocaleDateString('en-US'); // "MM/DD/YYYY"
+  const startTime = startDate.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true }); // "HH:MM AM/PM"
+  const endTime = endDate.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true }); // "HH:MM AM/PM"
+
+  return (
+    <Card className="h-100" border="success">
+      <Card.Header>
+        <Row>
+          <Col>
+            <Card.Title>{studySession.className}</Card.Title>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <p className="text-muted">
+              <Calendar3 /> Date: {dateString}
+            </p>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <p className="text-muted">
+              <Clock /> Time: {startTime} - {endTime}
+            </p>
+          </Col>
+        </Row>
+      </Card.Header>
+      <Card.Body>
+        <ListGroup className="list-group-flush">
+          <ListGroup.Item>{studySession.description}</ListGroup.Item>
+          <ListGroup.Item>
+            <Envelope /> {studySession.owner}
+          </ListGroup.Item>
+        </ListGroup>
+        <Row className="mt-3">
+          <Col className="d-flex justify-content-end">
+            <Link to={`/edit-session/${studySession._id}`} className="btn btn-primary">
+              Edit
+            </Link>
+          </Col>
+        </Row>
+      </Card.Body>
+    </Card>
+  );
+};
+  // Require a document to be passed to this component.
 StudySession.propTypes = {
   studySession: PropTypes.shape({
     className: PropTypes.string.isRequired,
@@ -44,5 +77,4 @@ StudySession.propTypes = {
     _id: PropTypes.string.isRequired,
   }).isRequired,
 };
-
 export default StudySession;
