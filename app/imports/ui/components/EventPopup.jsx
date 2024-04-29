@@ -114,7 +114,7 @@ const EventPopup = ({ event, onClose }) => {
               />
             </div>
             <div className="d-flex align-items-center">
-              <SubmitField name="Submit">RSVP</SubmitField>
+              <SubmitField inputClassName="swal-button swal-button--confirm" name="Submit">RSVP</SubmitField>
             </div>
           </div>
         </AutoForm>
