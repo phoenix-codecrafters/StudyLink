@@ -7,7 +7,8 @@ const developers = [
     imageUrl: 'https://avatars.githubusercontent.com/u/114624991?v=4',
     githubUrl: 'https://github.com/ktam808',
     PortfolioUrl: 'https://ktam808.github.io/',
-    description: 'reflect on what you\'ve learned from this project',
+    // eslint-disable-next-line max-len
+    description: 'Working on this project to create a study page website with my team has been a rewarding experience. It provided me with the opportunity to collaborate closely with others to build a platform that can have a meaningful impact on students\' learning journeys. Utilizing the Meteor-React full calendar system, I gained valuable experience integrating an interactive calendar to help users schedule and manage study sessions efficiently. Throughout the project, I improved my technical skills in Meteor and React, and honed my ability to handle complex data and user interactions for a smooth user experience.',
   },
   {
     id: 2,
@@ -24,7 +25,8 @@ const developers = [
     imageUrl: 'https://avatars.githubusercontent.com/u/97486797?s=400&u=0a9a19fffb7d8925be99333035fa457390b5d750&v=4',
     githubUrl: 'https://github.com/michelle4929',
     PortfolioUrl: 'https://michelle4929.github.io/',
-    description: 'reflect on what you\'ve learned from this project',
+    // eslint-disable-next-line max-len
+    description: 'Using React to create a study website for tech students in UHM was an eventful experience, enabling me to streamline development through component-based architecture, optimize performance with virtual DOM, and create dynamic user experiences with robust state management. Collaborating with peers enriched my learning journey, fostering creativity and resilience in problem-solving. Overall, React empowered me to build a polished and responsive study page while honing my technical skills and fostering a sense of community in the development process.',
   },
   {
     id: 5,
@@ -32,7 +34,8 @@ const developers = [
     imageUrl: 'https://avatars.githubusercontent.com/u/156730995?v=4',
     githubUrl: 'https://github.com/andrewgibbons575',
     PortfolioUrl: 'https://andrewgibbons575.github.io/',
-    description: 'Random words that maybe need or want but can later take out. :) blah blah blah blah blah blah yay!',
+    // eslint-disable-next-line max-len
+    description: '',
   },
   {
     id: 4,
@@ -40,7 +43,8 @@ const developers = [
     imageUrl: 'https://avatars.githubusercontent.com/u/156398965?v=4',
     githubUrl: 'https://github.com/banilowben',
     PortfolioUrl: 'https://banilowben.github.io/',
-    description: 'reflect on what you\'ve learned from this project',
+    // eslint-disable-next-line max-len
+    description: 'Working on this project helped me understand how to handle data collections effectively using React\'s state management. I got hands-on experience with React\'s component-based approach and learned how to update components dynamically based on state changes. This practical project gave me a chance to explore React\'s features and improve my skills in using state to create dynamic user interfaces for web applications.',
   },
 ];
 
