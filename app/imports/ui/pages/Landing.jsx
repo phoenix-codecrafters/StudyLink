@@ -19,7 +19,7 @@ const Landing = () => (
           </h5>
         </div>
       </Col>
-      <Col md={4} className="custom-column" id="white-soft-box">
+      <Col md={4} className="custom-column text-center" id="white-soft-box">
         <Image src="https://www.regenesys.net/wp-content/uploads/2023/09/study-1.png" width="300px" />
       </Col>
     </Row>
