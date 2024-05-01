@@ -9,6 +9,7 @@ import { Sessions } from '../../api/session/Session';
 const bridge = new SimpleSchema2Bridge(Sessions.schema);
 
 // Function to generate day options
+const currentDate = new Date();
 const generateDayOptions = () => {
   const options = [];
   for (let day = 1; day <= 31; day++) {
@@ -29,7 +30,7 @@ const generateMonthOptions = () => {
 // Function to generate year options
 const generateYearOptions = () => {
   const options = [];
-  const currentYear = new Date().getFullYear();
+  const currentYear = currentDate.getFullYear();
   for (let year = currentYear; year <= currentYear + 5; year++) {
     options.push({ label: year.toString(), value: year });
   }
@@ -70,6 +71,12 @@ const AddStudySession = () => {
   // On submit, insert the data.
   const submit = (data, formRef) => {
     const { day, month, year, startTime, endTime, className, ssOgh, description, isComplete, pointsAssign } = data;
+    const submittedDateTime = new Date(year, month - 1, day, Math.floor(startTime / 100), startTime % 100);
+    if (submittedDateTime < currentDate) {
+      swal('Error', 'Submitted date and time must be later than the current date and time.', 'error');
+      return;
+    }
+
     if (parseInt(endTime, 10) <= parseInt(startTime, 10)) {
       swal('Error', 'End time must be later than start time.', 'error');
       return;
