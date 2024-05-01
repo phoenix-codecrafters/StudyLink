@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import { Sessions } from '../../api/session/Session';
 
 /** Renders a single row in the List Stuff table. */
-const StudySession = ({ studySession }) => {
+const StudySessionAdmin = ({ studySession }) => {
   // start time
   const startHours = Math.floor(studySession.startTime / 100);
   const startMinutes = studySession.startTime % 100;
@@ -89,7 +89,7 @@ const StudySession = ({ studySession }) => {
   );
 };
   // Require a document to be passed to this component.
-StudySession.propTypes = {
+StudySessionAdmin.propTypes = {
   studySession: PropTypes.shape({
     className: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
@@ -104,4 +104,4 @@ StudySession.propTypes = {
     _id: PropTypes.string.isRequired,
   }).isRequired,
 };
-export default StudySession;
+export default StudySessionAdmin;
