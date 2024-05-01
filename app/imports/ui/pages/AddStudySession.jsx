@@ -57,6 +57,8 @@ const AddStudySession = () => {
   const submit = (data, formRef) => {
     const { day, month, year, startTime, endTime, className, ssOgh, description } = data;
     let { ssAttend, ghAttend } = data;
+    const isComplete = false;
+    const pointsAssign = false;
     const owner = Meteor.user().username;
     if (ssOgh === 0) {
       ghAttend = [owner];
@@ -66,7 +68,7 @@ const AddStudySession = () => {
       ghAttend = [''];
     }
     Sessions.collection.insert(
-      { day, month, year, startTime, endTime, className, description, ghAttend, ssAttend, owner },
+      { day, month, year, startTime, endTime, className, description, ghAttend, ssAttend, owner, isComplete, pointsAssign },
       (error) => {
         if (error) {
           swal('Error', error.message, 'error');
@@ -106,6 +108,8 @@ const AddStudySession = () => {
                 <HiddenField name="ghAttend" value="" />
                 <HiddenField name="ssAttend" value="" />
                 <HiddenField name="owner" value="username" />
+                <HiddenField name="isComplete" />
+                <HiddenField name="pointsAssign" />
                 <SubmitField value="Submit" />
                 <ErrorsField />
               </Card.Body>

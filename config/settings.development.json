@@ -17,8 +17,8 @@
   ],
 
   "defaultSessions": [
-    {"day":  "01", "month":  "05", "year":  "2024", "startTime":  "1200", "endTime":  "1400", "className":  "ICS 311", "description": "I need help with algorithms", "ghAttend": [ "john@foo.com", "test@foo.com" ], "ssAttend": [ "admin@foo.com" ], "owner": "john@foo.com"},
-    {"day":  "30", "month":  "04", "year":  "2024", "startTime":  "1600", "endTime":  "2000", "className":  "ICS 314", "description": "I need help with algorithms", "ghAttend": [ "john@foo.com", "test@foo.com" ], "ssAttend": [ "admin@foo.com" ], "owner": "john@foo.com"}
+    {"day":  "01", "month":  "05", "year":  "2024", "startTime":  "1200", "endTime":  "1400", "className":  "ICS 311", "description": "I need help with algorithms", "ghAttend": [ "john@foo.com", "test@foo.com" ], "ssAttend": [ "admin@foo.com" ], "owner": "john@foo.com", "isComplete":  false, "pointsAssign":  false},
+    {"day":  "30", "month":  "04", "year":  "2024", "startTime":  "1600", "endTime":  "2000", "className":  "ICS 314", "description": "I need help with algorithms", "ghAttend": [ "john@foo.com", "test@foo.com" ], "ssAttend": [ "admin@foo.com" ], "owner": "john@foo.com", "isComplete":  false, "pointsAssign":  false}
   ],
 
   "defaultScores": [
