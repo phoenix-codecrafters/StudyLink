@@ -1,22 +1,19 @@
 import React from 'react';
 import swal from 'sweetalert';
-import { Card, Col, Container, Row, Image } from 'react-bootstrap';
+import { Card, Col, Container, Image, Row } from 'react-bootstrap';
 import { AutoForm, ErrorsField, LongTextField, SubmitField, TextField, SelectField, HiddenField } from 'uniforms-bootstrap5';
 import { Meteor } from 'meteor/meteor';
 import { useTracker } from 'meteor/react-meteor-data';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
-import { Profiles } from '../../api/profile/Profile';
+import { useParams } from 'react-router';
 import LoadingSpinner from '../components/LoadingSpinner';
+import { Profiles } from '../../api/profile/Profile';
 
 const bridge = new SimpleSchema2Bridge(Profiles.schema);
 
 /* Renders the EditContact page for editing a single document. */
-const EditProfile = () => {
-  const user = Meteor.user();
-
-  if (!user) {
-    return <div>How did you get here?... Go Back</div>;
-  }
+const AdminEditProfile = () => {
+  const { _id } = useParams();
   // useTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
   const { doc, ready } = useTracker(() => {
     // Get access to Contact documents.
@@ -24,15 +21,15 @@ const EditProfile = () => {
     // Determine if the subscription is ready
     const rdy = subscription.ready();
     // Get the document
-    const document = Profiles.collection.find({ owner: user.username }).fetch();
+    const document = Profiles.collection.findOne(_id);
     return {
-      doc: document[0],
+      doc: document,
       ready: rdy,
     };
-  });
+  }, [_id]);
   const submit = (data) => {
-    const { firstname, lastname, image, classStanding, major, description } = data;
-    Profiles.collection.update(doc._id, { $set: { firstname, lastname, image, classStanding, major, description } }, (error) => (error ?
+    const { firstname, lastname, image, classStanding, major, score, description } = data;
+    Profiles.collection.update(doc._id, { $set: { firstname, lastname, image, classStanding, major, score, description } }, (error) => (error ?
       swal('Error', error.message, 'error') :
       swal('Success', 'Item updated successfully', 'success')));
   };
@@ -60,12 +57,13 @@ const EditProfile = () => {
                 <SelectField id="edit-major" label="Focus:" name="major" placeholder="Choose...">
                   options= {['Information and Computer Sciences (ICS)', 'Information Technology Management (ITM)', 'Computer Engineering']}
                 </SelectField>
+                <TextField id="score" type="text" name="score" label="Score:" />
                 <LongTextField id="edit-description" as="textarea" name="description" label="Description:" placeholder="Tell us more about you" />
+                <HiddenField name="owner" />
                 <ErrorsField />
                 <Row className="d-flex justify-content-end">
                   <SubmitField value="Submit" />
                 </Row>
-                <HiddenField name="score" />
               </Card.Body>
             </Card>
           </AutoForm>
@@ -75,4 +73,4 @@ const EditProfile = () => {
   ) : <LoadingSpinner />;
 };
 
-export default EditProfile;
+export default AdminEditProfile;

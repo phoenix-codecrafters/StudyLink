@@ -24,7 +24,10 @@ class ProfilesCollection {
         allowedValues: ['Information and Computer Sciences (ICS)', 'Information Technology Management (ITM)', 'Computer Engineering'],
       },
       description: String,
-      score: Number,
+      score: {
+        type: Number,
+        optional: true, // Make the score field optional
+      },
       owner: String,
     });
     // Attach the schema to the collection, so all attempts to insert a document are checked against schema.

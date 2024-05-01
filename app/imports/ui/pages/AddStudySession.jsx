@@ -39,12 +39,27 @@ const generateYearOptions = () => {
 // Function to generate time options with 30-minute increments
 const generateTimeOptions = () => {
   const options = [];
+  const addZero = num => (num < 10 ? `0${num}` : num); // Helper function to add leading zero
+
+  // Loop through hours from 8 AM to 8 PM (inclusive)
   for (let hour = 8; hour <= 20; hour++) {
+    const isPM = hour >= 12;
+    const displayHour = isPM ? hour - 12 : hour; // Convert to 12-hour format
+    const suffix = isPM ? 'PM' : 'AM';
+
+    // Generate times in 30-minute increments
     for (let minute = 0; minute < 60; minute += 30) {
-      const hourString = hour.toString().padStart(2, '0');
-      const minuteString = minute.toString().padStart(2, '0');
-      const time = hourString + minuteString;
-      options.push({ label: time, value: time });
+      const formattedHour = displayHour === 0 ? 12 : displayHour; // Display hour should be 12 for 0
+      const formattedMinute = addZero(minute); // Ensure minutes are in "00" or "30" format
+
+      // Calculate numeric value representing the time
+      const numericTime = (hour * 100) + minute;
+
+      // Generate the time label in 12-hour format with AM/PM
+      const timeLabel = `${formattedHour}:${formattedMinute} ${suffix}`;
+
+      // Push option with label and numeric value
+      options.push({ label: timeLabel, value: numericTime });
     }
   }
   return options;
@@ -52,10 +67,13 @@ const generateTimeOptions = () => {
 
 /* Renders the AddStuff page for adding a document. */
 const AddStudySession = () => {
-
   // On submit, insert the data.
   const submit = (data, formRef) => {
     const { day, month, year, startTime, endTime, className, ssOgh, description, isComplete, pointsAssign } = data;
+    if (parseInt(endTime, 10) <= parseInt(startTime, 10)) {
+      swal('Error', 'End time must be later than start time.', 'error');
+      return;
+    }
     let { ssAttend, ghAttend } = data;
     const owner = Meteor.user().username;
     if (ssOgh === 0) {
@@ -77,7 +95,6 @@ const AddStudySession = () => {
       },
     );
   };
-
   // Render the form. Use Uniforms: https://github.com/vazco/uniforms
   let fRef = null;
   return (
