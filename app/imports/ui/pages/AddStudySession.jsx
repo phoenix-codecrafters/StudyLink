@@ -69,7 +69,7 @@ const generateTimeOptions = () => {
 const AddStudySession = () => {
   // On submit, insert the data.
   const submit = (data, formRef) => {
-    const { day, month, year, startTime, endTime, className, ssOgh, description } = data;
+    const { day, month, year, startTime, endTime, className, ssOgh, description, isComplete, pointsAssign } = data;
     if (parseInt(endTime, 10) <= parseInt(startTime, 10)) {
       swal('Error', 'End time must be later than start time.', 'error');
       return;
@@ -84,7 +84,7 @@ const AddStudySession = () => {
       ghAttend = [''];
     }
     Sessions.collection.insert(
-      { day, month, year, startTime, endTime, className, description, ghAttend, ssAttend, owner },
+      { day, month, year, startTime, endTime, className, description, ghAttend, ssAttend, owner, isComplete, pointsAssign },
       (error) => {
         if (error) {
           swal('Error', error.message, 'error');
@@ -123,6 +123,8 @@ const AddStudySession = () => {
                 <HiddenField name="ghAttend" value="" />
                 <HiddenField name="ssAttend" value="" />
                 <HiddenField name="owner" value="username" />
+                <HiddenField name="isComplete" value="false" />
+                <HiddenField name="pointsAssign" value="false" />
                 <SubmitField value="Submit" />
                 <ErrorsField />
               </Card.Body>

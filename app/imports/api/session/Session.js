@@ -35,6 +35,12 @@ class SessionsCollection {
       'ssAttend.$': {
         type: String,
       },
+      isComplete: {
+        type: Boolean,
+      },
+      pointsAssign: {
+        type: Boolean,
+      },
       owner: String,
     });
     // Attach the schema to the collection, so all attempts to insert a document are checked against schema.
