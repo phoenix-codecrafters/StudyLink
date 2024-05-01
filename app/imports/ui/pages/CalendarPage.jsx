@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { Meteor } from 'meteor/meteor';
 import { useTracker } from 'meteor/react-meteor-data';
 import FullCalendar from '@fullcalendar/react';
@@ -20,16 +20,14 @@ const CalendarPage = () => {
 
   // Function to format time from "HHMM" to "HH:MM:SS"
   const formatTime = (time) => {
-    // Convert time to string if it isn't already
     const timeString = time.toString().padStart(4, '0');
     const hours = timeString.slice(0, 2);
     const minutes = timeString.slice(2, 4);
     return `${hours}:${minutes}:00`;
   };
 
-  // Format events for FullCalendar
-  const formattedEvents = events.map(event => {
-    // Convert day, month, and year properties to strings
+  // Use useMemo to optimize formattedEvents
+  const formattedEvents = useMemo(() => events.map(event => {
     const day = String(event.day).padStart(2, '0');
     const month = String(event.month).padStart(2, '0');
     const year = String(event.year);
@@ -38,7 +36,6 @@ const CalendarPage = () => {
     const start = `${year}-${month}-${day}T${formatTime(event.startTime)}`;
     const end = `${year}-${month}-${day}T${formatTime(event.endTime)}`;
 
-    // Return the formatted event object
     return {
       title: event.className,
       start,
@@ -46,7 +43,7 @@ const CalendarPage = () => {
       description: event.description,
       id: event._id,
     };
-  });
+  }), [events]); // Only recompute when events array changes
 
   const [showEventPopup, setShowEventPopup] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState(null);
