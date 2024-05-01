@@ -26,6 +26,8 @@ import EditProfile from '../pages/EditProfile';
 import AddStudySession from '../pages/AddStudySession';
 import CalendarPage from '../pages/CalendarPage';
 import AdminListStudySessions from '../pages/AdminListStudySessions';
+import AdminListProfiles from '../pages/AdminListProfiles';
+import AdminEditProfile from '../pages/AdminEditProfile';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
@@ -58,6 +60,8 @@ const App = () => {
           <Route path="/edit/:_id" element={<ProtectedRoute><EditStuff /></ProtectedRoute>} />
           <Route path="/admin" element={<AdminProtectedRoute ready={ready}><ListStuffAdmin /></AdminProtectedRoute>} />
           <Route path="/adminlistsessions" element={<AdminProtectedRoute ready={ready}><AdminListStudySessions /></AdminProtectedRoute>} />
+          <Route path="/adminlistprofiles" element={<AdminProtectedRoute ready={ready}><AdminListProfiles /></AdminProtectedRoute>} />
+          <Route path="/admineditprofile/:_id" element={<AdminProtectedRoute ready={ready}><AdminEditProfile /></AdminProtectedRoute>} />
           <Route path="/notauthorized" element={<NotAuthorized />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
