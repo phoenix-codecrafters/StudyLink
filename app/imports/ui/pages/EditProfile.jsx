@@ -1,7 +1,7 @@
 import React from 'react';
 import swal from 'sweetalert';
 import { Card, Col, Container, Row, Image } from 'react-bootstrap';
-import { AutoForm, ErrorsField, LongTextField, SubmitField, TextField, SelectField } from 'uniforms-bootstrap5';
+import { AutoForm, ErrorsField, LongTextField, SubmitField, TextField, SelectField, HiddenField } from 'uniforms-bootstrap5';
 import { Meteor } from 'meteor/meteor';
 import { useTracker } from 'meteor/react-meteor-data';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
@@ -65,6 +65,7 @@ const EditProfile = () => {
                 <Row className="d-flex justify-content-end">
                   <SubmitField value="Submit" />
                 </Row>
+                <HiddenField name="score" />
               </Card.Body>
             </Card>
           </AutoForm>
