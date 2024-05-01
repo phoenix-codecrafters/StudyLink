@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Card, Col, Container, Row } from 'react-bootstrap';
 import { AutoForm, ErrorsField, HiddenField, LongTextField, RadioField, SelectField, SubmitField, TextField } from 'uniforms-bootstrap5';
 import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
+import PropTypes from 'prop-types';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
+import { Navigate } from 'react-router-dom';
 import { Sessions } from '../../api/session/Session';
 
 const bridge = new SimpleSchema2Bridge(Sessions.schema);
@@ -67,9 +69,10 @@ const generateTimeOptions = () => {
 };
 
 /* Renders the AddStuff page for adding a document. */
-const AddStudySession = () => {
+const AddStudySession = ({ location }) => {
+  const [redirectToReferer, setRedirectToRef] = useState(false);
   // On submit, insert the data.
-  const submit = (data, formRef) => {
+  const submit = (data) => {
     const { day, month, year, startTime, endTime, className, ssOgh, description, isComplete, pointsAssign } = data;
     const submittedDateTime = new Date(year, month - 1, day, Math.floor(startTime / 100), startTime % 100);
     if (submittedDateTime < currentDate) {
@@ -96,20 +99,22 @@ const AddStudySession = () => {
         if (error) {
           swal('Error', error.message, 'error');
         } else {
-          swal('Success', 'Item added successfully', 'success');
-          formRef.reset();
+          swal('Success', 'Session created successfully', 'success');
+          setRedirectToRef(true);
         }
       },
     );
   };
-  // Render the form. Use Uniforms: https://github.com/vazco/uniforms
-  let fRef = null;
+  const { from } = location?.state || { from: { pathname: '/mystudysessions' } };
+  if (redirectToReferer) {
+    return <Navigate to={from} />;
+  }
   return (
     <Container className="py-3">
       <Row className="justify-content-center">
         <Col xs={5}>
           <Col className="text-center"><h2>Add Study Session</h2></Col>
-          <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => submit(data, fRef)}>
+          <AutoForm schema={bridge} onSubmit={data => submit(data)}>
             <Card>
               <Card.Body>
                 <SelectField name="day" options={generateDayOptions()} placeholder="Choose..." />
@@ -141,6 +146,16 @@ const AddStudySession = () => {
       </Row>
     </Container>
   );
+};
+
+AddStudySession.propTypes = {
+  location: PropTypes.shape({
+    state: PropTypes.string,
+  }),
+};
+
+AddStudySession.defaultProps = {
+  location: { state: '' },
 };
 
 export default AddStudySession;
