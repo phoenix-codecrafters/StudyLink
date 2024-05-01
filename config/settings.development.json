@@ -6,23 +6,21 @@
 
   "defaultAccounts": [
     { "email": "admin@foo.com", "password": "changeme", "role": "admin" },
-    { "email": "john@foo.com", "password": "changeme"}
+    { "email": "john@foo.com", "password": "changeme"},
+    { "email": "chad@foo.com", "password": "changeme"},
+    { "email": "sara@foo.com", "password": "changeme"},
+    { "email": "charlie@foo.com", "password": "changeme"}
   ],
 
   "defaultProfiles": [
-    {"firstname": "admin", "lastname": "siradmin", "image": "https://upload.wikimedia.org/wikipedia/commons/2/2c/Default_pfp.svg", "classStanding": "Freshman", "major": "Information and Computer Sciences (ICS)", "description": "i am admin", "owner":  "admin@foo.com", "score": "45"},
-    {"firstname": "John", "lastname": "Foo", "image": "https://upload.wikimedia.org/wikipedia/commons/2/2c/Default_pfp.svg", "classStanding": "Sophomore", "major": "Information and Computer Sciences (ICS)", "description": "i am john", "owner":  "john@foo.com", "score": "45" },
-    {"firstname": "Jane", "lastname": "Doe", "image": "https://upload.wikimedia.org/wikipedia/commons/2/2c/Default_pfp.svg", "classStanding": "Sophomore", "major": "Information and Computer Sciences (ICS)", "description": "i am john", "owner":  "john@foo.com", "score": "55" }
-
+    {"firstname": "John", "lastname": "Foo", "image": "https://upload.wikimedia.org/wikipedia/commons/2/2c/Default_pfp.svg", "classStanding": "Sophomore", "major": "Information and Computer Sciences (ICS)", "description": "i am john foo. Fear me.", "owner":  "john@foo.com", "score": "45" },
+    {"firstname": "Chad", "lastname": "NotMorita", "image": "https://avatars.githubusercontent.com/u/21248477?v=4", "classStanding": "Graduate", "major": "Information and Computer Sciences (ICS)", "description": "i am Chad. I like energy drinks.", "owner":  "chad@foo.com", "score": "999999" },
+    {"firstname": "Sara", "lastname": "Supee", "image": "https://i.pinimg.com/564x/3d/b0/8e/3db08eb78de3d2acd734a110c0c71b4c.jpg", "classStanding": "Senior", "major": "Information Technology Management (ITM)", "description": "i am Sara. I like poptropica.", "owner":  "sara@foo.com", "score": "547" },
+    {"firstname": "Charlie", "lastname": "Chapes", "image": "https://img.freepik.com/premium-vector/stick-figure-man-pulls-his-hand-up-isolated-vector_566661-762.jpg", "classStanding": "Sophomore", "major": "Computer Engineering", "description": "i am Charlie. I like neopets", "owner":  "charlie@foo.com", "score": "62" }
   ],
 
   "defaultSessions": [
-    {"day":  "01", "month":  "05", "year":  "2024", "startTime":  "1200", "endTime":  "1400", "className":  "ICS 311", "description": "I need help with algorithms", "ghAttend": [ "john@foo.com", "test@foo.com" ], "ssAttend": [ "admin@foo.com" ], "owner": "john@foo.com", "isComplete":  "false", "pointsAssign":  "false"},
-    {"day":  "30", "month":  "04", "year":  "2024", "startTime":  "1600", "endTime":  "2000", "className":  "ICS 314", "description": "I need help with algorithms", "ghAttend": [ "john@foo.com", "test@foo.com" ], "ssAttend": [ "admin@foo.com" ], "owner": "john@foo.com", "isComplete":  "false", "pointsAssign": "false"}
-  ],
-
-  "defaultScores": [
-    { "name": "Jane Doe", "owner": "john@foo.com", "attendance": "5", "score": "30" },
-    { "name": "John Doe", "owner": "john@foo.com", "attendance": "2", "score": "45" }
+    {"day":  "21", "month":  "05", "year":  "2024", "startTime":  "1200", "endTime":  "1400", "className":  "ICS 311", "description": "I need help with algorithms", "ghAttend": [ "john@foo.com", "charlie@foo.com" ], "ssAttend": [ "chad@foo.com" ], "owner": "john@foo.com", "isComplete":  "false", "pointsAssign":  "false"},
+    {"day":  "30", "month":  "05", "year":  "2024", "startTime":  "1600", "endTime":  "2000", "className":  "ICS 314", "description": "Navigating the intricacies of React and Meteor has presented challenges, and I find myself in need of assistance to overcome them. From understanding React's component structure to optimizing Meteor's real-time data synchronization, guidance would greatly accelerate my progress. Troubleshooting rendering issues and enhancing performance are areas where expert advice could make a significant difference in my project development.", "ghAttend": [ "john@foo.com", "charlie@foo.com" ], "ssAttend": [ "chad@foo.com", "sara@foo.com" ], "owner": "charlie@foo.com", "isComplete":  "false", "pointsAssign": "false"}
   ]
 }
