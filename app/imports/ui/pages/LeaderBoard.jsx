@@ -46,13 +46,13 @@ const LeaderBoard = () => {
       // Logic for assigning points to `ghAttendUsers` array
       ghAttendUsers.forEach(userId => {
         const eachProfile = profiles.find(profile => profile.owner === userId);
-        Profiles.collection.update(eachProfile._id, { $inc: { score: 2 } }); // Increment points by 2
+        Profiles.collection.update({ _id: eachProfile._id }, { $inc: { score: 2 } }); // Increment points by 2
       });
 
       // Logic for assigning points to `ssAttendUsers` array
       ssAttendUsers.forEach(userId => {
         const eachProfile = profiles.find(profile => profile.owner === userId);
-        Profiles.collection.update(eachProfile._id, { $inc: { score: 3 } }); // Increment points by 3
+        Profiles.collection.update({ _id: eachProfile._id }, { $inc: { score: 3 } }); // Increment points by 3
       });
 
       // Mark session as points assigned
