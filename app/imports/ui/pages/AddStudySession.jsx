@@ -55,10 +55,8 @@ const AddStudySession = () => {
 
   // On submit, insert the data.
   const submit = (data, formRef) => {
-    const { day, month, year, startTime, endTime, className, ssOgh, description } = data;
+    const { day, month, year, startTime, endTime, className, ssOgh, description, isComplete, pointsAssign } = data;
     let { ssAttend, ghAttend } = data;
-    const isComplete = false;
-    const pointsAssign = false;
     const owner = Meteor.user().username;
     if (ssOgh === 0) {
       ghAttend = [owner];
@@ -108,8 +106,8 @@ const AddStudySession = () => {
                 <HiddenField name="ghAttend" value="" />
                 <HiddenField name="ssAttend" value="" />
                 <HiddenField name="owner" value="username" />
-                <HiddenField name="isComplete" />
-                <HiddenField name="pointsAssign" />
+                <HiddenField name="isComplete" value="false" />
+                <HiddenField name="pointsAssign" value="false" />
                 <SubmitField value="Submit" />
                 <ErrorsField />
               </Card.Body>
