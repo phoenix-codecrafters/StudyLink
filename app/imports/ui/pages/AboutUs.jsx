@@ -29,15 +29,6 @@ const developers = [
     description: 'Using React to create a study website for tech students in UHM was an eventful experience, enabling me to streamline development through component-based architecture, optimize performance with virtual DOM, and create dynamic user experiences with robust state management. Collaborating with peers enriched my learning journey, fostering creativity and resilience in problem-solving. Overall, React empowered me to build a polished and responsive study page while honing my technical skills and fostering a sense of community in the development process.',
   },
   {
-    id: 5,
-    name: 'Andrew Gibbons',
-    imageUrl: 'https://avatars.githubusercontent.com/u/156730995?v=4',
-    githubUrl: 'https://github.com/andrewgibbons575',
-    PortfolioUrl: 'https://andrewgibbons575.github.io/',
-    // eslint-disable-next-line max-len
-    description: '',
-  },
-  {
     id: 4,
     name: 'Benjamin Banilower',
     imageUrl: 'https://avatars.githubusercontent.com/u/156398965?v=4',
@@ -45,6 +36,15 @@ const developers = [
     PortfolioUrl: 'https://banilowben.github.io/',
     // eslint-disable-next-line max-len
     description: 'Working on this project helped me understand how to handle data collections effectively using React\'s state management. I got hands-on experience with React\'s component-based approach and learned how to update components dynamically based on state changes. This practical project gave me a chance to explore React\'s features and improve my skills in using state to create dynamic user interfaces for web applications.',
+  },
+  {
+    id: 5,
+    name: 'Andrew Gibbons',
+    imageUrl: 'https://avatars.githubusercontent.com/u/156730995?v=4',
+    githubUrl: 'https://github.com/andrewgibbons575',
+    PortfolioUrl: 'https://andrewgibbons575.github.io/',
+    // eslint-disable-next-line max-len
+    description: '',
   },
 ];
 
