@@ -74,7 +74,7 @@ const StudySessionAdmin = ({ studySession }) => {
         </ListGroup>
         <Row className="mt-3">
           <Col className="d-flex justify-content-start">
-            <Link to={`/editstudysession/${studySession._id}`} className="btn btn-primary">
+            <Link to={`/admineditsession/${studySession._id}`} className="btn btn-primary">
               Edit
             </Link>
           </Col>

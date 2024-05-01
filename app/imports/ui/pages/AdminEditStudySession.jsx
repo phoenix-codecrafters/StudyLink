@@ -72,7 +72,7 @@ const generateTimeOptions = () => {
 };
 
 /* Renders the EditContact page for editing a single document. */
-const EditStudySession = ({ location }) => {
+const AdminEditStudySession = ({ location }) => {
   const [redirectToReferer, setRedirectToRef] = useState(false);
   const { _id } = useParams();
   // useTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
@@ -99,7 +99,7 @@ const EditStudySession = ({ location }) => {
       }
     });
   };
-  const { from } = location?.state || { from: { pathname: '/mystudysessions' } };
+  const { from } = location?.state || { from: { pathname: '/adminlistsessions' } };
   if (redirectToReferer) {
     return <Navigate to={from} />;
   }
@@ -132,14 +132,14 @@ const EditStudySession = ({ location }) => {
   ) : <LoadingSpinner />;
 };
 
-EditStudySession.propTypes = {
+AdminEditStudySession.propTypes = {
   location: PropTypes.shape({
     state: PropTypes.string,
   }),
 };
 
-EditStudySession.defaultProps = {
+AdminEditStudySession.defaultProps = {
   location: { state: '' },
 };
 
-export default EditStudySession;
+export default AdminEditStudySession;
