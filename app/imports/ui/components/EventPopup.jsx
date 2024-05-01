@@ -17,8 +17,8 @@ const EventPopup = ({ event, onClose }) => {
   const description = event._def.extendedProps.description;
 
   // format time and date
-  const month = event.start.getMonth();
-  const day = event.start.getDay();
+  const month = event.start.getMonth() + 1;
+  const day = event.start.getDate();
   const startTime = event.start.toLocaleTimeString('en-US', {
     hour12: true,
     hour: 'numeric',
