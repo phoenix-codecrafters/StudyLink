@@ -47,14 +47,16 @@ const ProfileAdmin = ({ profile }) => (
           </p>
         </Col>
       </Row>
-      <Row className="mt-3">
+    </Card.Body>
+    <Card.Footer>
+      <Row>
         <Col className="d-flex justify-content-start">
           <Link to={`/admineditprofile/${profile._id}`} className="btn btn-primary">
             Edit
           </Link>
         </Col>
       </Row>
-    </Card.Body>
+    </Card.Footer>
   </Card>
 );
   // Require a document to be passed to this component.
