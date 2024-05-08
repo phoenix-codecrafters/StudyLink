@@ -105,8 +105,8 @@ const AddStudySession = () => {
           <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => submit(data, fRef)}>
             <Card>
               <Card.Body>
-                <SelectField name="day" options={generateDayOptions()} placeholder="Choose..." />
                 <SelectField name="month" options={generateMonthOptions()} placeholder="Choose..." />
+                <SelectField name="day" options={generateDayOptions()} placeholder="Choose..." />
                 <SelectField name="year" options={generateYearOptions()} placeholder="Choose..." />
                 <SelectField name="startTime" options={generateTimeOptions()} placeholder="Choose..." />
                 <SelectField name="endTime" options={generateTimeOptions()} placeholder="Choose..." />

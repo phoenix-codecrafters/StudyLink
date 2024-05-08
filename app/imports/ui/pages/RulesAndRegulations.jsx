@@ -29,9 +29,11 @@ const RulesAndRegulations = () => (
             <ul>
               <li>1. Respectful Behavior: Users must treat others with respect and refrain from engaging in harassment, discrimination, or offensive behavior.</li>
               <li>2. Make an Account: Users are required to create an account to access certain study materials and features.</li>
-              <li>3. Become a Grasshopper and Sensei: The profile page enables each student to list courses they have/are taking and for which they are willing to provide help and be a sensei or if they might need help and be a grasshopper.</li>
-              <li>4. Profile Picture: Students are required to provide a picture of themselves so they may be easily identified in study sessions.</li>
-              <li>5. Make a Study Session: Students can make a study session with a proposed time, which will notify other grasshoppers and senseis who are interested in participating to join.</li>
+              <li>3. Profile Picture: Students are required to provide a picture of themselves so they may be easily identified in study sessions.</li>
+              {/* eslint-disable-next-line max-len */}
+              <li>4. Join or Make a Session: If you want to join a session, make sure to check the calendar provided for you to see if there is a session you are interested in joining. Otherwise, you are free to make a session. Try to add
+                clear and specific details to your study session!
+              </li>
             </ul>
           </Col>
         </Row>
