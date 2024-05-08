@@ -26,22 +26,17 @@ class AddStudySessionPage {
     await testController.click(this.daySelect);
     await testController.click(Selector('option').withText(sessionData.day));
     await testController.click(this.monthSelect);
-    try {
-      await testController.click(Selector('option').withText(sessionData.month));
-    } catch (error) {
-      console.error('Error clicking dropdown option:', error);
-    }
+    await testController.click(Selector(`select[name="month"] option[value="${sessionData.month}"]`));
     await testController.click(this.yearSelect);
     await testController.click(Selector('option').withText(sessionData.year));
     await testController.click(this.startTimeSelect);
     await testController.click(Selector('option').withText(sessionData.startTime));
     await testController.click(this.endTimeSelect);
-    await testController.click(Selector('option').withText(sessionData.endTime));
-    await testController.typeText(this.classNameInputInput, sessionData.className);
+    await testController.click(Selector(`select[name="endTime"] option[value="${sessionData.endTime}"]`));
+    await testController.typeText(this.classNameInput, sessionData.className);
     await testController.click(this.studentTypeSelect);
-    await testController.click(Selector('input[type="radio"]').withText('Grasshopper'));
     await testController.typeText(this.descriptionInput, sessionData.description);
-    await testController.click('#Submit input.btn.btn-primary');
+    await testController.click('Submit');
   }
 }
 
