@@ -44,7 +44,9 @@ const developers = [
     githubUrl: 'https://github.com/andrewgibbons575',
     PortfolioUrl: 'https://andrewgibbons575.github.io/',
     // eslint-disable-next-line max-len
-    description: '',
+    description: 'Using Meteor with React to develop a website for collaborative study sessions has been an enlightening journey. Leveraging Meteor\'s real-time data synchronization capabilities, I helped integrate features for users to' +
+      ' create and schedule study sessions for their classes. React\'s component-based architecture allowed for modular design, enhancing the website\'s scalability and maintainability. Overall, the combination of Meteor and React' +
+      ' empowered my team to create a user-friendly platform that facilitates efficient and engaging study sessions for students.',
   },
 ];
 
