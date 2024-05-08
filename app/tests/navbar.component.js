@@ -53,6 +53,16 @@ class NavBar {
     await testController.click('#login-dropdown-sign-up');
   }
 
+  async goToMyProfilePage(testController) {
+    const visible = await Selector('#basic-navbar-nav').visible;
+    if (!visible) {
+      await testController.click('button.navbar-toggler');
+    }
+    await testController.expect(Selector('#navbar-current-user').exists).ok();
+    await testController.click('#navbar-current-user');
+    await testController.click('#navbar-my-profile');
+  }
+
   async goToEditProfilePage(testController) {
     const visible = await Selector('#basic-navbar-nav').visible;
     if (!visible) {
@@ -88,6 +98,15 @@ class NavBar {
     }
     await testController.expect(Selector('#navbar-current-user').exists).ok();
     await testController.click('#calendar');
+  }
+
+  async goToAddSessionPage(testController) {
+    const visible = await Selector('#basic-navbar-nav').visible;
+    if (!visible) {
+      await testController.click('button.navbar-toggler');
+    }
+    await testController.expect(Selector('#navbar-current-user').exists).ok();
+    await testController.click('#addstudysession');
   }
 }
 

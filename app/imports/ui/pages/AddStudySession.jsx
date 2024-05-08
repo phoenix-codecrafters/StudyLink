@@ -110,7 +110,7 @@ const AddStudySession = ({ location }) => {
     return <Navigate to={from} />;
   }
   return (
-    <Container className="py-3">
+    <Container id="add-session-page" className="py-3">
       <Row className="justify-content-center">
         <Col xs={5}>
           <Col className="text-center"><h2>Add Study Session</h2></Col>
