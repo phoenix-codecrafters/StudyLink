@@ -113,7 +113,6 @@ const AddStudySession = ({ location }) => {
     <Container className="py-3" style={{ fontFamily: 'Concert One, sans-serif' }}>
       <Row className="justify-content-center">
         <Col xs={5}>
-          <Col className="text-center"><h2>Add Study Session</h2></Col>
           <AutoForm schema={bridge} onSubmit={data => submit(data)}>
             <Card>
               <Card.Body>

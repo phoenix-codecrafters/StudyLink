@@ -36,7 +36,7 @@ const MyStudySessions = () => {
             </Col>
             <Row xs={1} md={2} lg={3} className="g-4">
               {mySessions.length === 0 ? (
-                <Container id="no-sessions-box"><h3>You currently don&apos;t own any sessions.</h3></Container>
+                <Container id="no-sessions-box" className="text-center"><h3>You currently don&apos;t own any sessions.</h3></Container>
               ) : (
                 mySessions.map((session) => (
                   <Col key={session._id}>

@@ -30,6 +30,8 @@ const Profile = () => {
       ready: rdy,
     };
   });
+  console.log('doc:', doc);
+  console.log('ready:', ready);
   // console.log('EditContact', doc, ready);
   return ready ? (
     <Container className="py-3" style={{ fontFamily: 'Concert One, sans-serif' }}>
