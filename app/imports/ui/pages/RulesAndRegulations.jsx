@@ -2,8 +2,8 @@ import React from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 
 const RulesAndRegulations = () => (
-  <Container id="rules-and-reg" className="my-auto py-3 ">
-    <Row className="d-flex justify-content-center pb-2">
+  <Container id="rules-and-reg" className="my-auto py-3 " style={{ fontFamily: 'Concert One, sans-serif' }}>
+    <Row className="d-flex justify-content-center pb-2" style={{ backgroundColor: 'white', marginBottom: '20px', paddingBottom: '20px' }}>
       <Col md={10}>
         <Col className="text-center py-3">
           <h1>Rules and Regulations</h1>
@@ -34,6 +34,9 @@ const RulesAndRegulations = () => (
               <li>5. Make a Study Session: Students can make a study session with a proposed time, which will notify other grasshoppers and senseis who are interested in participating to join.</li>
             </ul>
           </Col>
+        </Row>
+        <Row>
+          <p style={{ color: 'white' }}>.</p>
         </Row>
       </Col>
     </Row>

@@ -42,14 +42,12 @@ const SignIn = () => {
   // Otherwise return the Login form.
   return (
     <Container id="signin-page" className="py-3">
-      <Row className="justify-content-center">
+      <Row className="justify-content-center" style={{ fontFamily: 'Concert One, sans-serif' }}>
         <Col xs={5}>
-          <Col className="text-center">
-            <h2>Login to your account</h2>
-          </Col>
           <AutoForm schema={bridge} onSubmit={data => submit(data)}>
             <Card>
               <Card.Body>
+                <h2 className="text-center">Login to your account</h2>
                 <TextField id="signin-form-email" name="email" placeholder="E-mail address" />
                 <TextField id="signin-form-password" name="password" placeholder="Password" type="password" />
                 <ErrorsField />
