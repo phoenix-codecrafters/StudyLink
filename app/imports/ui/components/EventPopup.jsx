@@ -11,15 +11,24 @@ import { Sessions } from '../../api/session/Session';
 import LoadingSpinner from './LoadingSpinner';
 
 const EventPopup = ({ event, onClose }) => {
+  // get current day for rsvp disable
+  const currDate = new Date();
   // Convert the Date objects to string representations
-  const startDate = event.start instanceof Date ? event.start.toString() : event.start;
-  const endDate = event.end instanceof Date ? event.end.toString() : event.end;
   const description = event._def.extendedProps.description;
 
   // format time and date
-  const day = startDate.slice(0, 10);
-  const startTime = startDate.slice(16, 24);
-  const endTime = endDate.slice(16, 24);
+  const month = event.start.getMonth() + 1;
+  const day = event.start.getDate();
+  const startTime = event.start.toLocaleTimeString('en-US', {
+    hour12: true,
+    hour: 'numeric',
+    minute: '2-digit',
+  });
+  const endTime = event.end.toLocaleTimeString('en-US', {
+    hour12: true,
+    hour: 'numeric',
+    minute: '2-digit',
+  });
 
   const rsvpSchema = new SimpleSchema({
     ssOgh: Number,
@@ -78,6 +87,7 @@ const EventPopup = ({ event, onClose }) => {
         <Modal.Title>{event.title}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
+        <p><strong>Month:</strong> {month}</p>
         <p><strong>Day:</strong> {day}</p>
         <p><strong>Start:</strong> {startTime}</p>
         <p><strong>End:</strong> {endTime}</p>
@@ -100,19 +110,40 @@ const EventPopup = ({ event, onClose }) => {
       <Modal.Footer>
         <AutoForm schema={bridge} onSubmit={data => rsvp(data)}>
           <div className="d-flex">
-            <div className="form-check-label pr-3" style={{ marginTop: '1rem', paddingRight: '1rem' }}>Choose: </div>
-            <div>
-              <RadioField
-                style={{ marginTop: '1rem' }}
-                name="ssOgh"
-                label=""
-                inline
-                options={[
-                  { label: 'Grasshopper', value: 0 },
-                  { label: 'Sensei', value: 1 },
-                ]}
-              />
-            </div>
+            {currDate > event.start ? (
+              <>
+                <div className="form-check-label pr-3" style={{ marginTop: '1rem', paddingRight: '1rem', color: 'palevioletred' }}>UNAVAILABLE: </div>
+                <div>
+                  <RadioField
+                    style={{ marginTop: '1rem', color: 'palevioletred' }}
+                    name="ssOgh"
+                    label=""
+                    inline
+                    options={[
+                      { label: 'Grasshopper', value: 0 },
+                      { label: 'Sensei', value: 1 },
+                    ]}
+                    disabled
+                  />
+                </div>
+              </>
+            ) : (
+              <>
+                <div className="form-check-label pr-3" style={{ marginTop: '1rem', paddingRight: '1rem' }}>Choose: </div>
+                <div>
+                  <RadioField
+                    style={{ marginTop: '1rem' }}
+                    name="ssOgh"
+                    label=""
+                    inline
+                    options={[
+                      { label: 'Grasshopper', value: 0 },
+                      { label: 'Sensei', value: 1 },
+                    ]}
+                  />
+                </div>
+              </>
+            )}
             <div className="d-flex align-items-center">
               <SubmitField inputClassName="swal-button swal-button--confirm" name="Submit">RSVP</SubmitField>
             </div>

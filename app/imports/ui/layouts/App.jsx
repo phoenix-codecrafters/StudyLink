@@ -6,9 +6,6 @@ import { Roles } from 'meteor/alanning:roles';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Landing from '../pages/Landing';
-import ListStuffAdmin from '../pages/ListStuffAdmin';
-import AddStuff from '../pages/AddStuff';
-import EditStuff from '../pages/EditStuff';
 import NotFound from '../pages/NotFound';
 import SignUp from '../pages/SignUp';
 import SignOut from '../pages/SignOut';
@@ -28,6 +25,7 @@ import CalendarPage from '../pages/CalendarPage';
 import AdminListStudySessions from '../pages/AdminListStudySessions';
 import AdminListProfiles from '../pages/AdminListProfiles';
 import AdminEditProfile from '../pages/AdminEditProfile';
+import AdminEditStudySession from '../pages/AdminEditStudySession';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
@@ -56,12 +54,10 @@ const App = () => {
           <Route path="/mystudysessions" element={<ProtectedRoute><MyStudySessions /></ProtectedRoute>} />
           <Route path="/editstudysession/:_id" element={<ProtectedRoute><EditStudySession /></ProtectedRoute>} />
           <Route path="/calendar" element={<ProtectedRoute><CalendarPage /></ProtectedRoute>} />
-          <Route path="/add" element={<ProtectedRoute><AddStuff /></ProtectedRoute>} />
-          <Route path="/edit/:_id" element={<ProtectedRoute><EditStuff /></ProtectedRoute>} />
-          <Route path="/admin" element={<AdminProtectedRoute ready={ready}><ListStuffAdmin /></AdminProtectedRoute>} />
           <Route path="/adminlistsessions" element={<AdminProtectedRoute ready={ready}><AdminListStudySessions /></AdminProtectedRoute>} />
           <Route path="/adminlistprofiles" element={<AdminProtectedRoute ready={ready}><AdminListProfiles /></AdminProtectedRoute>} />
           <Route path="/admineditprofile/:_id" element={<AdminProtectedRoute ready={ready}><AdminEditProfile /></AdminProtectedRoute>} />
+          <Route path="/admineditsession/:_id" element={<AdminProtectedRoute ready={ready}><AdminEditStudySession /></AdminProtectedRoute>} />
           <Route path="/notauthorized" element={<NotAuthorized />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

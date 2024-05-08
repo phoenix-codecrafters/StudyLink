@@ -23,25 +23,28 @@ const NavBar = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto justify-content-start custom-heading">
+
             {Roles.userIsInRole(Meteor.userId(), 'admin') ? ([
               <NavDropdown id="admin-dropdown" title="Admin Tools">
-                <NavDropdown.Item id="adminlistsessions" as={NavLink} to="/adminlistsessions" key="admin">
+                <NavDropdown.Item id="adminlistsessions" as={NavLink} to="/adminlistsessions" key="adminsesh">
                   Session Panel
                 </NavDropdown.Item>
-                <NavDropdown.Item id="adminlistprofiles" as={NavLink} to="/adminlistprofiles" key="admin">
+                <NavDropdown.Item id="adminlistprofiles" as={NavLink} to="/adminlistprofiles" key="adminprof">
                   Profile Panel
                 </NavDropdown.Item>
               </NavDropdown>,
             ]) : ''}
+
             {currentUser ? ([
               <Nav.Link id="calendar" as={NavLink} to="/calendar" key="calendar">Calendar</Nav.Link>,
               <Nav.Link id="addstudysession" as={NavLink} to="/addstudysession" key="addstudysession">Add Study Session</Nav.Link>,
-              <Nav.Link id="leaderboard" as={NavLink} to="/leader" key="list">Leaderboard</Nav.Link>,
-              <Nav.Link id="sessions" as={NavLink} to="/mystudysessions" key="list sessions">Owned Study Sessions</Nav.Link>,
+              <Nav.Link id="leaderboard" as={NavLink} to="/leader" key="leaderboard">Leaderboard</Nav.Link>,
+              <Nav.Link id="sessions" as={NavLink} to="/mystudysessions" key="listmysessions">Owned Study Sessions</Nav.Link>,
             ]) : ([
               <Nav.Link id="about-us-nav" as={NavLink} to="/about-us" key="about-us">About Us</Nav.Link>,
               <Nav.Link id="rules-and-regulations" as={NavLink} to="/RulesAndRegulations" key="rulesandregulations">Rules and Regulations</Nav.Link>,
             ])}
+
           </Nav>
           <Nav className="justify-content-end custom-heading">
             {currentUser === '' ? (

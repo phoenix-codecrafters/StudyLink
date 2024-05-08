@@ -1,18 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import swal from 'sweetalert';
 import { Card, Col, Container, Image, Row } from 'react-bootstrap';
 import { AutoForm, ErrorsField, LongTextField, SubmitField, TextField, SelectField, HiddenField } from 'uniforms-bootstrap5';
 import { Meteor } from 'meteor/meteor';
 import { useTracker } from 'meteor/react-meteor-data';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
+import PropTypes from 'prop-types';
 import { useParams } from 'react-router';
+import { Navigate } from 'react-router-dom';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { Profiles } from '../../api/profile/Profile';
 
 const bridge = new SimpleSchema2Bridge(Profiles.schema);
 
 /* Renders the EditContact page for editing a single document. */
-const AdminEditProfile = () => {
+const AdminEditProfile = ({ location }) => {
+  const [redirectToReferer, setRedirectToRef] = useState(false);
   const { _id } = useParams();
   // useTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
   const { doc, ready } = useTracker(() => {
@@ -29,14 +32,23 @@ const AdminEditProfile = () => {
   }, [_id]);
   const submit = (data) => {
     const { firstname, lastname, image, classStanding, major, score, description } = data;
-    Profiles.collection.update(doc._id, { $set: { firstname, lastname, image, classStanding, major, score, description } }, (error) => (error ?
-      swal('Error', error.message, 'error') :
-      swal('Success', 'Item updated successfully', 'success')));
+    Profiles.collection.update(doc._id, { $set: { firstname, lastname, image, classStanding, major, score, description } }, (error) => {
+      if (error) {
+        swal('Error', error.message, 'error');
+      } else {
+        swal('Success', 'Profile updated successfully', 'success');
+        setRedirectToRef(true);
+      }
+    });
   };
+  const { from } = location?.state || { from: { pathname: '/adminlistprofiles' } };
+  if (redirectToReferer) {
+    return <Navigate to={from} />;
+  }
   return ready ? (
     <Container id="editprofile-page" className="py-3">
       <Row>
-        <Col className="text-center"><h2>My Profile</h2></Col>
+        <Col className="text-center"><h2>Edit Profile</h2></Col>
         <Container className="d-flex justify-content-center">
           <AutoForm schema={bridge} onSubmit={data => submit(data)} model={doc}>
             <Card>
@@ -71,6 +83,16 @@ const AdminEditProfile = () => {
       </Row>
     </Container>
   ) : <LoadingSpinner />;
+};
+
+AdminEditProfile.propTypes = {
+  location: PropTypes.shape({
+    state: PropTypes.string,
+  }),
+};
+
+AdminEditProfile.defaultProps = {
+  location: { state: '' },
 };
 
 export default AdminEditProfile;

@@ -1,14 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Card, Col, Container, Row } from 'react-bootstrap';
 import { AutoForm, ErrorsField, HiddenField, LongTextField, RadioField, SelectField, SubmitField, TextField } from 'uniforms-bootstrap5';
 import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
+import PropTypes from 'prop-types';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
+import { Navigate } from 'react-router-dom';
 import { Sessions } from '../../api/session/Session';
 
 const bridge = new SimpleSchema2Bridge(Sessions.schema);
 
 // Function to generate day options
+const currentDate = new Date();
 const generateDayOptions = () => {
   const options = [];
   for (let day = 1; day <= 31; day++) {
@@ -29,7 +32,7 @@ const generateMonthOptions = () => {
 // Function to generate year options
 const generateYearOptions = () => {
   const options = [];
-  const currentYear = new Date().getFullYear();
+  const currentYear = currentDate.getFullYear();
   for (let year = currentYear; year <= currentYear + 5; year++) {
     options.push({ label: year.toString(), value: year });
   }
@@ -66,10 +69,17 @@ const generateTimeOptions = () => {
 };
 
 /* Renders the AddStuff page for adding a document. */
-const AddStudySession = () => {
+const AddStudySession = ({ location }) => {
+  const [redirectToReferer, setRedirectToRef] = useState(false);
   // On submit, insert the data.
-  const submit = (data, formRef) => {
-    const { day, month, year, startTime, endTime, className, ssOgh, description } = data;
+  const submit = (data) => {
+    const { day, month, year, startTime, endTime, className, ssOgh, description, isComplete, pointsAssign } = data;
+    const submittedDateTime = new Date(year, month - 1, day, Math.floor(startTime / 100), startTime % 100);
+    if (submittedDateTime < currentDate) {
+      swal('Error', 'Submitted date and time must be later than the current date and time.', 'error');
+      return;
+    }
+
     if (parseInt(endTime, 10) <= parseInt(startTime, 10)) {
       swal('Error', 'End time must be later than start time.', 'error');
       return;
@@ -84,27 +94,29 @@ const AddStudySession = () => {
       ghAttend = [''];
     }
     Sessions.collection.insert(
-      { day, month, year, startTime, endTime, className, description, ghAttend, ssAttend, owner },
+      { day, month, year, startTime, endTime, className, description, ghAttend, ssAttend, owner, isComplete, pointsAssign },
       (error) => {
         if (error) {
           swal('Error', error.message, 'error');
         } else {
-          swal('Success', 'Item added successfully', 'success');
-          formRef.reset();
+          swal('Success', 'Session created successfully', 'success');
+          setRedirectToRef(true);
         }
       },
     );
   };
-  // Render the form. Use Uniforms: https://github.com/vazco/uniforms
-  let fRef = null;
+  const { from } = location?.state || { from: { pathname: '/mystudysessions' } };
+  if (redirectToReferer) {
+    return <Navigate to={from} />;
+  }
   return (
-    <Container className="py-3">
+    <Container className="py-3" style={{ fontFamily: 'Concert One, sans-serif' }}>
       <Row className="justify-content-center">
         <Col xs={5}>
-          <Col className="text-center"><h2>Add Study Session</h2></Col>
-          <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => submit(data, fRef)}>
+          <AutoForm schema={bridge} onSubmit={data => submit(data)}>
             <Card>
               <Card.Body>
+                <h2 className="text-center">Add Study Session</h2>
                 <SelectField name="month" options={generateMonthOptions()} placeholder="Choose..." />
                 <SelectField name="day" options={generateDayOptions()} placeholder="Choose..." />
                 <SelectField name="year" options={generateYearOptions()} placeholder="Choose..." />
@@ -123,6 +135,8 @@ const AddStudySession = () => {
                 <HiddenField name="ghAttend" value="" />
                 <HiddenField name="ssAttend" value="" />
                 <HiddenField name="owner" value="username" />
+                <HiddenField name="isComplete" value="false" />
+                <HiddenField name="pointsAssign" value="false" />
                 <SubmitField value="Submit" />
                 <ErrorsField />
               </Card.Body>
@@ -132,6 +146,16 @@ const AddStudySession = () => {
       </Row>
     </Container>
   );
+};
+
+AddStudySession.propTypes = {
+  location: PropTypes.shape({
+    state: PropTypes.string,
+  }),
+};
+
+AddStudySession.defaultProps = {
+  location: { state: '' },
 };
 
 export default AddStudySession;
