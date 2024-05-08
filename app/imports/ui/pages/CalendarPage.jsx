@@ -60,14 +60,15 @@ const CalendarPage = () => {
 
   return (
     <div>
-      <div className="calendar-container" id="white-box" style={{ margin: 'auto', width: '97%', marginTop: '20px', marginBottom: '20px' }}>
+      <div className="calendar-container" id="white-box" style={{ margin: 'auto', width: '97%', marginTop: '20px', marginBottom: '20px', fontFamily: 'Concert One, sans-serif' }}>
         {ready ? (
           <>
             <FullCalendar
               plugins={[dayGridPlugin]}
+              eventColor="#9faa85"
               initialView="dayGridMonth"
               headerToolbar={{
-                left: 'prev, next today',
+                left: 'prev next today',
                 center: 'title',
                 right: 'dayGridMonth,dayGridWeek,dayGridDay',
               }}
@@ -75,7 +76,7 @@ const CalendarPage = () => {
               eventClick={handleEventClick}
             />
             {showEventPopup && selectedEvent && (
-              <EventPopup event={selectedEvent} onClose={handleClosePopup} />
+              <EventPopup event={selectedEvent} onClose={handleClosePopup} style={{ fontFamily: 'Concert One, sans-serif' }} />
             )}
           </>
         ) : (
