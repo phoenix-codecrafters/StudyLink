@@ -13,11 +13,11 @@
   ],
 
   "defaultProfiles": [
-    {"firstname": "John", "lastname": "Foo", "image": "https://upload.wikimedia.org/wikipedia/commons/2/2c/Default_pfp.svg", "classStanding": "Sophomore", "major": "Information and Computer Sciences (ICS)", "description": "i am john foo. Fear me.", "owner":  "john@foo.com", "score": "45" },
+    {"firstname": "admin", "lastname": "siradmin", "image": "https://img.buzzfeed.com/buzzfeed-static/static/2023-06/12/23/asset/ef84a49e1225/sub-buzz-2151-1686610956-1.png", "classStanding": "Freshman", "major": "Information and Computer Sciences (ICS)", "description": "i am admin", "owner":  "admin@foo.com", "score": "45"},
+    {"firstname": "John", "lastname": "Foo", "image": "https://img.buzzfeed.com/buzzfeed-static/static/2023-06/12/23/asset/899c84e520bc/sub-buzz-1901-1686611237-1.png?downsize=900:*&output-format=auto&output-quality=auto", "classStanding": "Sophomore", "major": "Information and Computer Sciences (ICS)", "description": "i am john foo. Fear me.", "owner":  "john@foo.com", "score": "45" },
     {"firstname": "Chad", "lastname": "NotMorita", "image": "https://avatars.githubusercontent.com/u/21248477?v=4", "classStanding": "Graduate", "major": "Information and Computer Sciences (ICS)", "description": "i am Chad. I like energy drinks.", "owner":  "chad@foo.com", "score": "999999" },
-    {"firstname": "Sara", "lastname": "Supee", "image": "https://i.pinimg.com/564x/3d/b0/8e/3db08eb78de3d2acd734a110c0c71b4c.jpg", "classStanding": "Senior", "major": "Information Technology Management (ITM)", "description": "i am Sara. I like poptropica.", "owner":  "sara@foo.com", "score": "547" },
-    {"firstname": "Charlie", "lastname": "Chapes", "image": "https://img.freepik.com/premium-vector/stick-figure-man-pulls-his-hand-up-isolated-vector_566661-762.jpg", "classStanding": "Sophomore", "major": "Computer Engineering", "description": "i am Charlie. I like neopets", "owner":  "charlie@foo.com", "score": "62" },
-    {"firstname": "Admin", "lastname": "Foo", "image": "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcQFSGwTrSpoWyqvFQJuD1rZDhNR4Be0BiD9uRUuCF6kFbwTO8rk430U--zuu_dPO-c1un_Ih77JHbA4pAmkXT4koJeukEW15uFKn-BUNgsEDjsoJRvfdZHpgXPBGUPp-XFS5uJ46tXJPQ&usqp=CAc", "classStanding": "Senior", "major": "Computer Engineering", "description": "I am Admin. I like rabbits", "owner":  "admin@foo.com", "score": "100" }
+    {"firstname": "Sara", "lastname": "Supee", "image": "https://img.freepik.com/premium-photo/young-indian-college-student-girl-happy-after-admission_437792-784.jpg?w=360", "classStanding": "Senior", "major": "Information Technology Management (ITM)", "description": "i am Sara. I like poptropica.", "owner":  "sara@foo.com", "score": "547" },
+    {"firstname": "Charlie", "lastname": "Chapes", "image": "https://img.buzzfeed.com/buzzfeed-static/static/2023-06/12/23/asset/5bbf08b11d4f/sub-buzz-1964-1686611424-1.png", "classStanding": "Sophomore", "major": "Computer Engineering", "description": "i am Charlie. I like neopets", "owner":  "charlie@foo.com", "score": "62" }
   ],
 
   "defaultSessions": [

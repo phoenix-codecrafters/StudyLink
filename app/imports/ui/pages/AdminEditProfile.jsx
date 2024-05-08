@@ -46,13 +46,13 @@ const AdminEditProfile = ({ location }) => {
     return <Navigate to={from} />;
   }
   return ready ? (
-    <Container id="editprofile-page" className="py-3">
+    <Container id="editprofile-page" className="py-3" style={{ fontFamily: 'Concert One, sans-serif' }}>
       <Row>
-        <Col className="text-center"><h2>Edit Profile</h2></Col>
         <Container className="d-flex justify-content-center">
           <AutoForm schema={bridge} onSubmit={data => submit(data)} model={doc}>
             <Card>
               <Card.Body>
+                <h2 className="text-center">Edit Profile</h2>
                 <Row>
                   <Col>
                     <TextField id="edit-first-name" type="text" name="firstname" label="First Name:" />

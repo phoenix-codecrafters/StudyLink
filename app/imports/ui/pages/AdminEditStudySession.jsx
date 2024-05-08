@@ -104,13 +104,13 @@ const AdminEditStudySession = ({ location }) => {
     return <Navigate to={from} />;
   }
   return ready ? (
-    <Container className="py-3">
+    <Container className="py-3" style={{ fontFamily: 'Concert One, sans-serif' }}>
       <Row className="justify-content-center">
         <Col xs={5}>
-          <Col className="text-center"><h2>Edit Study Session</h2></Col>
           <AutoForm schema={bridge} onSubmit={data => submit(data)} model={doc}>
             <Card>
               <Card.Body>
+                <h2 className="text-center">Edit Study Session</h2>
                 <SelectField name="day" options={generateDayOptions()} placeholder="Choose..." />
                 <SelectField name="month" options={generateMonthOptions()} placeholder="Choose..." />
                 <SelectField name="year" options={generateYearOptions()} placeholder="Choose..." />
