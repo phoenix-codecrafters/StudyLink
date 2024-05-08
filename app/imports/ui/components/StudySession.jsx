@@ -46,6 +46,13 @@ const StudySession = ({ studySession }) => {
         <Row>
           <Col>
             <p className="text-muted">
+              Created by: {studySession.owner}
+            </p>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <p className="text-muted">
               <Calendar3 /> Date: {dateString}
             </p>
           </Col>
@@ -58,8 +65,8 @@ const StudySession = ({ studySession }) => {
           </Col>
         </Row>
       </Card.Header>
-      <Card.Body>
-        <ListGroup className="list-group-flush">
+      <Card.Body className="d-flex flex-column">
+        <ListGroup className="list-group-flush flex-grow-1">
           <ListGroup.Item>{studySession.description}</ListGroup.Item>
           <ListGroup.Item>
             <Envelope /> {studySession.owner}

@@ -62,6 +62,10 @@ body {
   margin: auto;
 }
 
+.unavailable-label {
+  color: rosybrown;
+}
+
 .description-box {
   width: 300px;
   height: auto;

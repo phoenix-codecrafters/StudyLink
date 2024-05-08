@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
-import { Card, Col, Container, Row } from 'react-bootstrap';
-import { AutoForm, ErrorsField, HiddenField, LongTextField, RadioField, SelectField, SubmitField, TextField } from 'uniforms-bootstrap5';
 import swal from 'sweetalert';
+import { Card, Col, Container, Row } from 'react-bootstrap';
+import { AutoForm, ErrorsField, LongTextField, SubmitField, TextField, SelectField, HiddenField } from 'uniforms-bootstrap5';
 import { Meteor } from 'meteor/meteor';
-import PropTypes from 'prop-types';
+import { useTracker } from 'meteor/react-meteor-data';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import { Navigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { useParams } from 'react-router';
+import LoadingSpinner from '../components/LoadingSpinner';
 import { Sessions } from '../../api/session/Session';
 
 const bridge = new SimpleSchema2Bridge(Sessions.schema);
@@ -68,76 +71,56 @@ const generateTimeOptions = () => {
   return options;
 };
 
-/* Renders the AddStuff page for adding a document. */
-const AddStudySession = ({ location }) => {
+/* Renders the EditContact page for editing a single document. */
+const AdminEditStudySession = ({ location }) => {
   const [redirectToReferer, setRedirectToRef] = useState(false);
-  // On submit, insert the data.
+  const { _id } = useParams();
+  // useTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
+  const { doc, ready } = useTracker(() => {
+    // Get access to Contact documents.
+    const subscription = Meteor.subscribe(Sessions.userPublicationName);
+    // Determine if the subscription is ready
+    const rdy = subscription.ready();
+    // Get the document
+    const document = Sessions.collection.findOne(_id);
+    return {
+      doc: document,
+      ready: rdy,
+    };
+  }, [_id]);
   const submit = (data) => {
-    const { day, month, year, startTime, endTime, className, ssOgh, description, isComplete, pointsAssign } = data;
-    const submittedDateTime = new Date(year, month - 1, day, Math.floor(startTime / 100), startTime % 100);
-    if (submittedDateTime < currentDate) {
-      swal('Error', 'Submitted date and time must be later than the current date and time.', 'error');
-      return;
-    }
-
-    if (parseInt(endTime, 10) <= parseInt(startTime, 10)) {
-      swal('Error', 'End time must be later than start time.', 'error');
-      return;
-    }
-    let { ssAttend, ghAttend } = data;
-    const owner = Meteor.user().username;
-    if (ssOgh === 0) {
-      ghAttend = [owner];
-      ssAttend = [''];
-    } else {
-      ssAttend = [owner];
-      ghAttend = [''];
-    }
-    Sessions.collection.insert(
-      { day, month, year, startTime, endTime, className, description, ghAttend, ssAttend, owner, isComplete, pointsAssign },
-      (error) => {
-        if (error) {
-          swal('Error', error.message, 'error');
-        } else {
-          swal('Success', 'Session created successfully', 'success');
-          setRedirectToRef(true);
-        }
-      },
-    );
+    const { day, month, year, startTime, endTime, className, description } = data;
+    Sessions.collection.update(doc._id, { $set: { day, month, year, startTime, endTime, className, description } }, (error) => {
+      if (error) {
+        swal('Error', error.message, 'error');
+      } else {
+        swal('Success', 'Session updated successfully', 'success');
+        setRedirectToRef(true);
+      }
+    });
   };
-  const { from } = location?.state || { from: { pathname: '/mystudysessions' } };
+  const { from } = location?.state || { from: { pathname: '/adminlistsessions' } };
   if (redirectToReferer) {
     return <Navigate to={from} />;
   }
-  return (
-    <Container className="py-3" style={{ fontFamily: 'Concert One, sans-serif' }}>
+  return ready ? (
+    <Container className="py-3">
       <Row className="justify-content-center">
         <Col xs={5}>
-          <Col className="text-center"><h2>Add Study Session</h2></Col>
-          <AutoForm schema={bridge} onSubmit={data => submit(data)}>
+          <Col className="text-center"><h2>Edit Study Session</h2></Col>
+          <AutoForm schema={bridge} onSubmit={data => submit(data)} model={doc}>
             <Card>
               <Card.Body>
-                <h2 className="text-center">Add Study Session</h2>
                 <SelectField name="day" options={generateDayOptions()} placeholder="Choose..." />
                 <SelectField name="month" options={generateMonthOptions()} placeholder="Choose..." />
                 <SelectField name="year" options={generateYearOptions()} placeholder="Choose..." />
                 <SelectField name="startTime" options={generateTimeOptions()} placeholder="Choose..." />
                 <SelectField name="endTime" options={generateTimeOptions()} placeholder="Choose..." />
                 <TextField name="className" placeholder="ex. ICS 314" />
-                <RadioField
-                  name="ssOgh"
-                  label="Choose:"
-                  options={[
-                    { label: 'Grasshopper', value: 0 },
-                    { label: 'Sensei', value: 1 },
-                  ]}
-                />
                 <LongTextField name="description" placeholder="Anything else you would like to specify." />
                 <HiddenField name="ghAttend" value="" />
                 <HiddenField name="ssAttend" value="" />
                 <HiddenField name="owner" value="username" />
-                <HiddenField name="isComplete" value="false" />
-                <HiddenField name="pointsAssign" value="false" />
                 <SubmitField value="Submit" />
                 <ErrorsField />
               </Card.Body>
@@ -146,17 +129,17 @@ const AddStudySession = ({ location }) => {
         </Col>
       </Row>
     </Container>
-  );
+  ) : <LoadingSpinner />;
 };
 
-AddStudySession.propTypes = {
+AdminEditStudySession.propTypes = {
   location: PropTypes.shape({
     state: PropTypes.string,
   }),
 };
 
-AddStudySession.defaultProps = {
+AdminEditStudySession.defaultProps = {
   location: { state: '' },
 };
 
-export default AddStudySession;
+export default AdminEditStudySession;

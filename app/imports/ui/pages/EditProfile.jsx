@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import swal from 'sweetalert';
+import { Navigate } from 'react-router-dom';
 import { Card, Col, Container, Row, Image } from 'react-bootstrap';
-import { AutoForm, ErrorsField, LongTextField, SubmitField, TextField, SelectField } from 'uniforms-bootstrap5';
+import { AutoForm, ErrorsField, LongTextField, SubmitField, TextField, SelectField, HiddenField } from 'uniforms-bootstrap5';
 import { Meteor } from 'meteor/meteor';
+import PropTypes from 'prop-types';
 import { useTracker } from 'meteor/react-meteor-data';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import { Profiles } from '../../api/profile/Profile';
@@ -11,8 +13,9 @@ import LoadingSpinner from '../components/LoadingSpinner';
 const bridge = new SimpleSchema2Bridge(Profiles.schema);
 
 /* Renders the EditContact page for editing a single document. */
-const EditProfile = () => {
+const EditProfile = ({ location }) => {
   const user = Meteor.user();
+  const [redirectToReferer, setRedirectToRef] = useState(false);
 
   if (!user) {
     return <div>How did you get here?... Go Back</div>;
@@ -32,14 +35,23 @@ const EditProfile = () => {
   });
   const submit = (data) => {
     const { firstname, lastname, image, classStanding, major, description } = data;
-    Profiles.collection.update(doc._id, { $set: { firstname, lastname, image, classStanding, major, description } }, (error) => (error ?
-      swal('Error', error.message, 'error') :
-      swal('Success', 'Item updated successfully', 'success')));
+    Profiles.collection.update(doc._id, { $set: { firstname, lastname, image, classStanding, major, description } }, (error) => {
+      if (error) {
+        swal('Error', error.message, 'error');
+      } else {
+        swal('Success', 'Profile updated successfully', 'success');
+        setRedirectToRef(true);
+      }
+    });
   };
+  const { from } = location?.state || { from: { pathname: '/profile' } };
+  if (redirectToReferer) {
+    return <Navigate to={from} />;
+  }
   return ready ? (
     <Container id="editprofile-page" className="py-3">
       <Row>
-        <Col className="text-center"><h2>My Profile</h2></Col>
+        <Col className="text-center"><h2>Edit Profile</h2></Col>
         <Container className="d-flex justify-content-center">
           <AutoForm schema={bridge} onSubmit={data => submit(data)} model={doc}>
             <Card>
@@ -65,6 +77,7 @@ const EditProfile = () => {
                 <Row className="d-flex justify-content-end">
                   <SubmitField value="Submit" />
                 </Row>
+                <HiddenField name="score" />
               </Card.Body>
             </Card>
           </AutoForm>
@@ -72,6 +85,16 @@ const EditProfile = () => {
       </Row>
     </Container>
   ) : <LoadingSpinner />;
+};
+
+EditProfile.propTypes = {
+  location: PropTypes.shape({
+    state: PropTypes.string,
+  }),
+};
+
+EditProfile.defaultProps = {
+  location: { state: '' },
 };
 
 export default EditProfile;

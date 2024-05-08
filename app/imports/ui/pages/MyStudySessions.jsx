@@ -32,7 +32,7 @@ const MyStudySessions = () => {
         <Row className="justify-content-center">
           <Col>
             <Col className="text-center">
-              <h2 className="mb-5">List My Study Sessions</h2>
+              <h2 className="mb-5">My Study Sessions</h2>
             </Col>
             <Row xs={1} md={2} lg={3} className="g-4">
               {mySessions.length === 0 ? (
