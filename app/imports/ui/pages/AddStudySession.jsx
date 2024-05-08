@@ -98,13 +98,13 @@ const AddStudySession = () => {
   // Render the form. Use Uniforms: https://github.com/vazco/uniforms
   let fRef = null;
   return (
-    <Container className="py-3">
+    <Container className="py-3" style={{ fontFamily: 'Concert One, sans-serif' }}>
       <Row className="justify-content-center">
         <Col xs={5}>
-          <Col className="text-center"><h2>Add Study Session</h2></Col>
           <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => submit(data, fRef)}>
             <Card>
               <Card.Body>
+                <h2 className="text-center">Add Study Session</h2>
                 <SelectField name="day" options={generateDayOptions()} placeholder="Choose..." />
                 <SelectField name="month" options={generateMonthOptions()} placeholder="Choose..." />
                 <SelectField name="year" options={generateYearOptions()} placeholder="Choose..." />

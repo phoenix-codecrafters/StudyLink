@@ -58,14 +58,12 @@ const SignUp = ({ location }) => {
 
   return (
     <Container id="signup-page" className="py-3">
-      <Row className="justify-content-center">
+      <Row className="justify-content-center" style={{ fontFamily: 'Concert One, sans-serif' }}>
         <Col xs={12} md={6}>
-          <div className="text-center">
-            <h2>Register your account</h2>
-          </div>
           <AutoForm schema={bridge} onSubmit={data => submit(data)}>
             <Card>
               <Card.Body>
+                <h2 className="text-center">Register your account</h2>
                 <TextField type="email" name="email" label="E-Mail:" placeholder="E-mail address" />
                 <TextField type="password" name="password" label="Password:" placeholder="Password" />
                 <Row>

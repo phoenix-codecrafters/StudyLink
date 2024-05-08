@@ -22,10 +22,9 @@ const AdminListProfiles = () => {
       ready: rdy,
     };
   });
-  console.log(profiles);
   return (
     ready ? (
-      <Container className="py-3">
+      <Container className="py-3" style={{ fontFamily: 'Concert One, sans-serif' }}>
         <Row className="justify-content-center">
           <Col>
             <Col className="text-center">

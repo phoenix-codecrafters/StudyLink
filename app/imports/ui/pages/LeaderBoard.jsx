@@ -24,7 +24,7 @@ const LeaderBoard = () => {
     };
   }, []);
   return (ready ? (
-    <Container id="leaderboard-page" className="py-3">
+    <Container id="leaderboard-page" className="py-3" style={{ fontFamily: 'Concert One, sans-serif' }}>
       <Row className="justify-content-center">
         <Col md={7}>
           <Col className="text-center">
@@ -47,7 +47,6 @@ const LeaderBoard = () => {
                   <PersonItem key={`${score._id}_${index}`} profile={score} rank={index + 1} />
                 ))}
             </tbody>
-
           </Table>
         </Col>
       </Row>

@@ -44,7 +44,7 @@ const developers = [
 ];
 
 const AboutUs = () => (
-  <div id="about-us" style={{ textAlign: 'center' }}>
+  <div id="about-us" className="justify-content-center" style={{ textAlign: 'center', fontFamily: 'Concert One, sans-serif' }}>
     <h2 style={{ marginBottom: '20px', marginTop: '20px' }}>Meet the Developers</h2>
     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '20px', justifyContent: 'center', margin: '10px', padding: '10px' }}>
       {developers.map(developer => (
