@@ -70,7 +70,17 @@ const generateTimeOptions = () => {
   }
   return options;
 };
+// Function to validate if the selected date is valid
+const isValidDate = (year, month, day) => {
+  // Check if the month is valid (1 to 12)
+  if (month < 1 || month > 12) {
+    return false;
+  }
 
+  // Check if the day is valid for the given month
+  const daysInMonth = new Date(year, month, 0).getDate();
+  return day > 0 && day <= daysInMonth;
+};
 /* Renders the EditContact page for editing a single document. */
 const EditStudySession = ({ location }) => {
   const [redirectToReferer, setRedirectToRef] = useState(false);
@@ -90,6 +100,20 @@ const EditStudySession = ({ location }) => {
   }, [_id]);
   const submit = (data) => {
     const { day, month, year, startTime, endTime, className, description } = data;
+    if (!isValidDate(year, month, day)) {
+      swal('Error', 'Selected date is not valid.', 'error');
+      return;
+    }
+    const submittedDateTime = new Date(year, month - 1, day, Math.floor(startTime / 100), startTime % 100);
+    if (submittedDateTime < currentDate) {
+      swal('Error', 'Submitted date and time must be later than the current date and time.', 'error');
+      return;
+    }
+
+    if (parseInt(endTime, 10) <= parseInt(startTime, 10)) {
+      swal('Error', 'End time must be later than start time.', 'error');
+      return;
+    }
     Sessions.collection.update(doc._id, { $set: { day, month, year, startTime, endTime, className, description } }, (error) => {
       if (error) {
         swal('Error', error.message, 'error');
@@ -111,8 +135,8 @@ const EditStudySession = ({ location }) => {
             <Card>
               <Card.Body>
                 <h2 className="text-center">Edit Study Session</h2>
-                <SelectField name="day" options={generateDayOptions()} placeholder="Choose..." />
                 <SelectField name="month" options={generateMonthOptions()} placeholder="Choose..." />
+                <SelectField name="day" options={generateDayOptions()} placeholder="Choose..." />
                 <SelectField name="year" options={generateYearOptions()} placeholder="Choose..." />
                 <SelectField name="startTime" options={generateTimeOptions()} placeholder="Choose..." />
                 <SelectField name="endTime" options={generateTimeOptions()} placeholder="Choose..." />
