@@ -1,5 +1,5 @@
-title: meteor-application-template-react
-description: A template for quickly starting Meteor application development
+title: StudyLink
+description: A web platform that connects students studying similar subjects, enabling them to collaborate on assignments, projects, and exam prep. With features like creating and joining study sessions, managing calendars, and tracking group activity, StudyLink offers a safe and supportive space for students to enhance their learning experience.
 google_analytics:
 show_downloads: true
 theme: jekyll-theme-cayman
