@@ -120,7 +120,9 @@ const AdminEditStudySession = ({ location }) => {
                 <LongTextField name="description" placeholder="Anything else you would like to specify." />
                 <HiddenField name="ghAttend" value="" />
                 <HiddenField name="ssAttend" value="" />
-                <HiddenField name="owner" value="username" />
+                <HiddenField name="isComplete" />
+                <HiddenField name="pointsAssign" />
+                <HiddenField name="owner" />
                 <SubmitField value="Submit" />
                 <ErrorsField />
               </Card.Body>
