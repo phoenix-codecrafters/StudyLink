@@ -34,9 +34,8 @@ class AddStudySessionPage {
     await testController.click(this.endTimeSelect);
     await testController.click(Selector(`select[name="endTime"] option[value="${sessionData.endTime}"]`));
     await testController.typeText(this.classNameInput, sessionData.className);
-    await testController.click(this.studentTypeSelect);
     await testController.typeText(this.descriptionInput, sessionData.description);
-    await testController.click('Submit');
+    await testController.click(this.submitButton);
   }
 }
 

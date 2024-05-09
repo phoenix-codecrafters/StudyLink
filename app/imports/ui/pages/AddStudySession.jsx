@@ -130,6 +130,7 @@ const AddStudySession = ({ location }) => {
                     { label: 'Grasshopper', value: 0 },
                     { label: 'Sensei', value: 1 },
                   ]}
+                  value={0}
                 />
                 <LongTextField name="description" placeholder="Anything else you would like to specify." />
                 <HiddenField name="ghAttend" value="" />

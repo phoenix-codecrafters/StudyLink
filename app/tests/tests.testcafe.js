@@ -9,6 +9,7 @@ import { aboutus } from './AboutUs.page';
 import { rulesandreg } from './RulesandRegulations.page';
 import { calendarPage } from './calendar.page';
 import { addStudySession } from './studysession.page';
+import { mySessions } from './ownedsessions.page';
 
 /* global fixture:false, test:false */
 
@@ -41,7 +42,7 @@ test('Test that Rules and Regulations page displays', async (testController) => 
   await rulesandreg.isDisplayed(testController);
 });
 
-test('Test that signup works', async (testController) => {
+test.only('Test that signup works', async (testController) => {
   await navBar.gotoSignUpPage(testController);
   await signupPage.signupUser(testController, userInfo);
   await navBar.isLoggedIn(testController, userInfo.email);
@@ -81,10 +82,18 @@ test('Test that edit profile works', async (testController) => {
   await navBar.goToMyProfilePage(testController);
 });
 
-test.only('Test that Add Session works', async (testController) => {
+test('Test that Add Session works', async (testController) => {
   await navBar.gotoSignInPage(testController);
   await signinPage.signin(testController, credentials.username, credentials.password);
   await navBar.isLoggedIn(testController, credentials.username);
   await navBar.goToAddSessionPage(testController);
   await addStudySession.addSession(testController, sessionInfo);
+});
+
+test('Test that Owned Study Sessions work', async (testController) => {
+  await navBar.gotoSignInPage(testController);
+  await signinPage.signin(testController, credentials.username, credentials.password);
+  await navBar.isLoggedIn(testController, credentials.username);
+  await navBar.goToOwnedSessionsPage(testController);
+  await mySessions.isDisplayed(testController);
 });
