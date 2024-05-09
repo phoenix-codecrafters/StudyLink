@@ -81,6 +81,7 @@ const isValidDate = (year, month, day) => {
 /* Renders the AddStuff page for adding a document. */
 const AddStudySession = ({ location }) => {
   const [redirectToReferer, setRedirectToRef] = useState(false);
+  const [selectedOption, setSelectedOption] = useState(0); // Added state variable for the selected option with default value 0 (Grasshopper)
   // On submit, insert the data.
   const submit = (data) => {
     const { day, month, year, startTime, endTime, className, ssOgh, description, isComplete, pointsAssign } = data;
@@ -145,7 +146,8 @@ const AddStudySession = ({ location }) => {
                     { label: 'Grasshopper', value: 0 },
                     { label: 'Sensei', value: 1 },
                   ]}
-                  value={0}
+                  value={selectedOption} // Use the selectedOption state variable here
+                  onChange={(value) => setSelectedOption(value)} // Update selectedOption when the user selects a different option
                 />
                 <LongTextField name="description" placeholder="Anything else you would like to specify." />
                 <HiddenField name="ghAttend" value="" />
