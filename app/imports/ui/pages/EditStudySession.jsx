@@ -121,7 +121,7 @@ const EditStudySession = ({ location }) => {
                 <HiddenField name="ghAttend" value="" />
                 <HiddenField name="ssAttend" value="" />
                 <HiddenField name="isComplete" />
-                <HiddenField name="pointsAssign" />
+                <HiddenField name="pointsAssign" value={doc.pointsAssign || 0} />
                 <HiddenField name="owner" />
                 <SubmitField value="Submit" />
                 <ErrorsField />
