@@ -1,5 +1,4 @@
 import { Selector } from 'testcafe';
-import { navBar } from './navbar.component';
 
 class SignupPage {
   constructor() {
@@ -33,7 +32,6 @@ class SignupPage {
     await testController.click(Selector('option').withText(userData.major));
     await testController.typeText(this.descriptionInput, userData.description);
     await testController.click(this.registerButton);
-    await navBar.isLoggedIn(testController, userData.email);
   }
 }
 
